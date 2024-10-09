@@ -21,8 +21,10 @@
 
   --radii: 10px;
 
-  --color-white: #f1f1ef;
   --color-base: #125365;
+  --color-white: #f1f1ef;
+  --color-green: #2A8F55;
+  --color-red: #DF4C25;
   --btn-color-active: #ff9c46;
   --btn-color-disable: #edd0b6;
   --text-btn-disable: #81a1a9;

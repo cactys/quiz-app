@@ -1,0 +1,31 @@
+.image {
+  object-fit: cover;
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.title {
+  font-weight: var(--font-w-bold);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+}
+
+.subtitle {
+  text-align: center;
+}
+
+.incorrect {
+  color: var(--color-green);
+  font-weight: var(--font-w-bold);
+}
+
+.error {
+  color: var(--color-red);
+  font-weight: var(--font-w-bold);
+}

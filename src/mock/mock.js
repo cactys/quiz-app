@@ -11,3 +11,15 @@ export const mockQuestions = [
     required: true,
   },
 ];
+
+export const mockAnswers = [
+  {
+    answersPartiallyCorrect: true,
+    result: {
+      incorrect: '12',
+      error: '6',
+    },
+    answersCorrect: false,
+    answersIncorrect: false,
+  },
+];

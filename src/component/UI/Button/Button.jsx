@@ -9,7 +9,11 @@ import styles from './Button.module.css';
 
 const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={`${styles.wrapper} ${
+        answerCount ? styles.wrapper_answer : ''
+      }`}
+    >
       <div className={styles.buttonContainer}>
         <button
           type={htmlType}

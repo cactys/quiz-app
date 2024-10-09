@@ -1,10 +1,14 @@
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   row-gap: 8px;
   width: 100%;
   padding: 0 0 20px;
+}
+
+.wrapper_answer {
+  justify-content: space-between;
 }
 
 .buttonContainer {
@@ -35,7 +39,7 @@
 
 .subtitle {
   position: absolute;
-  bottom: -19px;
+  bottom: -20px;
   font-weight: var(--font-w-regular);
   font-size: var(--font-size-xs);
   line-height: var(--line-height-xs);
