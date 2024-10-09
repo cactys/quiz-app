@@ -1,0 +1,16 @@
+.link {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0 0 16px;
+  vertical-align: top;
+}
+
+.logo {
+  display: block;
+  width: 178px;
+  height: 48px;
+  background-image: url(../../../assets/logo__desktop.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

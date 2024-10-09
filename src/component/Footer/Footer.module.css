@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  width: 590px;
+  margin: 16px 0 0;
+}
+
+.footerContent {
+  color: var(--color-white);
+  font-weight: var(--font-w-regular);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+.footerLink {
+  color: var(--color-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

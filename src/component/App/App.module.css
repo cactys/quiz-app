@@ -1,0 +1,10 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  align-items: center;
+  min-width: 1280px;
+  max-width: 100%;
+  min-height: 100vh;
+  background: var(--bg-main);
+}
