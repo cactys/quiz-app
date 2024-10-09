@@ -8,7 +8,7 @@ import { mockQuestions } from './mock/mock-questions';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
+  <StrictMode>
     <App children={<Question {...mockQuestions} />} />
-  // </StrictMode>
+  </StrictMode>
 );

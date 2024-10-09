@@ -35,7 +35,7 @@ const Welcome = ({ imageTitle, title, subtitle, contentSubtitle }) => {
         handleDecrementBtn={handleDecrementBtn}
         onChange={onChange}
       />
-      <Button title="Начать" type="submit" />
+      <Button title="Начать" htmlType="submit" />
     </>
   );
 };
