@@ -1,5 +1,6 @@
 .image {
   object-fit: cover;
+  /* padding: 0 0 12px; */
 }
 
 .header {
