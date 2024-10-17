@@ -1,20 +1,25 @@
-import Header from '../Header/Header';
-import Card from '../UI/Card/Card';
-import Footer from '../Footer/Footer';
+import Header from '@components/Header/Header';
+import Footer from '@components/Footer/Footer';
+import Card from '@ui/Card/Card';
 
 import styles from './App.module.css';
+import { useState } from 'react';
+import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 
 /**
  *
- * @param children JSX.Element
  * @returns JSX.Element
  */
 
-const App = ({ children }) => {
+const App = () => {
+  const [currentPage] = useState('question');
+
   return (
     <div className={styles.page}>
       <Header />
-      <Card children={children} />
+      <CurrentPageContext.Provider value={currentPage}>
+        <Card />
+      </CurrentPageContext.Provider>
       <Footer />
     </div>
   );

@@ -31,11 +31,11 @@
 }
 
 .decrementBtn {
-  background-image: url(../../../assets/images/icons/icons__60minus.svg);
+  background-image: url(@assets/images/icons/icons__60minus.svg);
 }
 
 .incrementBtn {
-  background-image: url(../../../assets/images/icons/icons__60plus.svg);
+  background-image: url(@assets/images/icons/icons__60plus.svg);
 }
 
 .counter {

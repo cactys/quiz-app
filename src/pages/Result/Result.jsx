@@ -1,6 +1,7 @@
+import Button from '@ui/Button/Button';
+
+import imageResult from '@assets/images/image__result.svg';
 import styles from './Result.module.css';
-import imageResult from '../../assets/images/image__result.svg';
-import Button from '../../component/UI/Button/Button';
 
 /**
  *

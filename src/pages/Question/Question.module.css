@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.image {
+  border-radius: var(--radii);
+}
+
 .title {
   font-weight: var(--font-w-medium);
   font-size: var(--font-size-base);
@@ -23,7 +27,7 @@
   font-size: 0;
   background-color: var(--color-white);
   cursor: pointer;
-  mask-image: url(../../assets/images/icons/icons__40error.svg);
+  mask-image: url(@assets/images/icons/icons__40error.svg);
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: cover;
@@ -51,6 +55,7 @@
   font-weight: var(--font-w-medium);
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
+  cursor: pointer;
   counter-increment: listcount;
 }
 

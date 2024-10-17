@@ -1,4 +1,5 @@
-import Button from '../../component/UI/Button/Button';
+import Button from '@ui/Button/Button';
+
 import styles from './Question.module.css';
 
 /**
@@ -23,14 +24,14 @@ const Question = (props) => {
           height={60}
         />
         <h2 className={styles.title}>{question}</h2>
-        <button type="submit" className={styles.closeBtn}>
+        <button type="button" className={styles.closeBtn}>
           Закрыть
         </button>
       </div>
       <ul className={styles.answerList}>
         {answerOptions.map((item, index) => (
           <li className={styles.answerItem} key={index}>
-            <button type="submit" className={styles.answerBtn}>
+            <button type="button" className={styles.answerBtn}>
               {item}
             </button>
           </li>

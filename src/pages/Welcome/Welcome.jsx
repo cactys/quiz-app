@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Counter from '../../component/UI/Counter/Counter';
-import Button from '../../component/UI/Button/Button';
+import Counter from '@ui/Counter/Counter';
+import Button from '@ui/Button/Button';
 
+import imageQuestion from '@assets/images/image__question.svg';
 import styles from './Welcome.module.css';
-import imageQuestion from '../../assets/images/image__question.svg';
 
 /**
  *
@@ -25,7 +25,7 @@ const Welcome = () => {
       <img
         className={styles.imageQuestion}
         src={imageQuestion}
-        alt='Добро пожаловать'
+        alt="Добро пожаловать"
         width={135}
         height={146}
       />
@@ -34,13 +34,13 @@ const Welcome = () => {
         <p className={styles.subtitle}>на викторину по странам и столицам!</p>
       </div>
       <Counter
-        subtitle='Выбери количество вопросов:'
+        subtitle="Выбери количество вопросов:"
         count={count}
         handleIncrementBtn={handleIncrementBtn}
         handleDecrementBtn={handleDecrementBtn}
         onChange={onChange}
       />
-      <Button title="Начать" htmlType="submit"/>
+      <Button title="Начать" htmlType="submit" />
     </>
   );
 };
