@@ -7,4 +7,5 @@
   max-width: 100%;
   min-height: 100vh;
   background: var(--bg-main);
+  background-attachment: fixed;
 }
