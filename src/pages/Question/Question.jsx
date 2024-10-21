@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import Button from '@/component/UI/Button/Button';
 
 import styles from './Question.module.css';
+import Card from '@/component/UI/Card/Card';
 
 /**
  *
@@ -11,40 +13,32 @@ import styles from './Question.module.css';
  */
 
 const Question = (props) => {
+  const [disableBtn, setDisableBtn] = useState(true);
   const { question, image, answerOptions } = props[0];
+  const { handleSwitchPage } = props;
+
+  const handleDisableBtn = () => {
+    setDisableBtn(!disableBtn);
+  };
+
+  const handleClose = () => {};
 
   return (
     <>
-      <div className={styles.header}>
-        <img
-          src={image}
-          alt={question}
-          className={styles.image}
-          width={90}
-          height={60}
-        />
-        <h2 className={styles.title}>{question}</h2>
-        <button type="button" className={styles.closeBtn}>
-          Закрыть
-        </button>
-      </div>
-      <ul className={styles.answerList}>
-        {answerOptions.map((item, index) => (
-          <li className={styles.answerItem} key={index}>
-            <button type="button" className={styles.answerBtn}>
-              {item}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div className={styles.footer}>
-        <Button
-          title="Ответить"
-          htmlType="submit"
-          answerCount={true}
-          disabled={true}
-        />
-      </div>
+      <Card
+        image={{ src: image, width: 90, height: 60 }}
+        subtitle={question}
+        closeBtn={handleClose}
+        answerOptions={answerOptions}
+        handleAnswerChoice={handleDisableBtn}
+      />
+      <Button
+        title="Ответить"
+        htmlType="button"
+        answerCount={true}
+        disabled={disableBtn}
+        handleButton={handleSwitchPage}
+      />
     </>
   );
 };

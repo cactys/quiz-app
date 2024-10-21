@@ -15,6 +15,9 @@ import styles from './Result.module.css';
 const Result = (props) => {
   const { answersCorrect, answersPartiallyCorrect, answersIncorrect, result } =
     props[0];
+  const { handleSwitchPage } = props;
+  
+  console.log(handleSwitchPage)
 
   return (
     <>
@@ -46,7 +49,11 @@ const Result = (props) => {
           </p>
         )}
       </div>
-      <Button title="Попробовать еще" htmlType="submit" />
+      <Button
+        title="Попробовать еще"
+        htmlType="button"
+        handleButton={handleSwitchPage}
+      />
     </>
   );
 };

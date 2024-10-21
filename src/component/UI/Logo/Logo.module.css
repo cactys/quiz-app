@@ -1,5 +1,5 @@
 .link {
-  display: inline-block;
+  display: flex;
   box-sizing: border-box;
   margin: 0 0 16px;
   vertical-align: top;

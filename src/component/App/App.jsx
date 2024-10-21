@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from '../Header/Header';
-import Card from '../UI/Card/Card';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 
 import styles from './App.module.css';
@@ -11,13 +12,25 @@ import styles from './App.module.css';
  */
 
 const App = () => {
-  const [currentPage] = useState('question');
+  const [currentPage, setCurrentPage] = useState('start');
+
+  const handleSwitchPage = () => {
+    setCurrentPage(
+      currentPage === 'start'
+        ? 'question'
+        : currentPage === 'question'
+        ? 'result'
+        : 'start'
+    );
+  };
+
+  console.log(currentPage);
 
   return (
     <div className={styles.page}>
       <Header />
       <CurrentPageContext.Provider value={currentPage}>
-        <Card />
+        <Main handleSwitchPage={handleSwitchPage} />
       </CurrentPageContext.Provider>
       <Footer />
     </div>

@@ -3,14 +3,15 @@ import Counter from '@/component/UI/Counter/Counter';
 import Button from '@/component/UI/Button/Button';
 
 import imageQuestion from '@assets/images/image__question.svg';
-import styles from './Welcome.module.css';
+import Card from '@/component/UI/Card/Card';
 
 /**
  *
- * @returns JSX.Element
+ * @param {() => void} handleSwitchPage - функция для переключения страницы
+ * @returns {JSX.Element} JSX.Element
  */
 
-const Welcome = () => {
+const Welcome = ({ handleSwitchPage }) => {
   const [count, setCount] = useState(18);
 
   const handleIncrementBtn = () => setCount((count) => parseInt(count) + 1);
@@ -22,17 +23,18 @@ const Welcome = () => {
 
   return (
     <>
-      <img
-        className={styles.imageQuestion}
-        src={imageQuestion}
-        alt="Добро пожаловать"
-        width={135}
-        height={146}
+      <Card
+        title="Добро пожаловать"
+        subtitle="на викторину по странам и столицам!"
+        image={{
+          src: imageQuestion,
+          width: 135,
+          height: 146,
+          position: 'absolute',
+          right: 0,
+          top: -79,
+        }}
       />
-      <div className={styles.header}>
-        <h2 className={styles.title}>Добро пожаловать</h2>
-        <p className={styles.subtitle}>на викторину по странам и столицам!</p>
-      </div>
       <Counter
         subtitle="Выбери количество вопросов:"
         count={count}
@@ -40,7 +42,11 @@ const Welcome = () => {
         handleDecrementBtn={handleDecrementBtn}
         onChange={onChange}
       />
-      <Button title="Начать" htmlType="submit" />
+      <Button
+        title="Начать"
+        htmlType="button"
+        handleButton={handleSwitchPage}
+      />
     </>
   );
 };
