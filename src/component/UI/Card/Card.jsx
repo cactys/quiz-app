@@ -1,10 +1,10 @@
 import { useContext } from 'react';
+import Welcome from '@/pages/Welcome/Welcome';
+import Question from '@/pages/Question/Question';
+import Result from '@/pages/Result/Result';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-import Welcome from '@pages/Welcome/Welcome';
-import Question from '@pages/Question/Question';
-import Result from '@pages/Result/Result';
-
 import { mockAnswers, mockQuestions } from '@/mock/mock';
+
 import styles from './Card.module.css';
 
 /**

@@ -1,10 +1,9 @@
-import Header from '@components/Header/Header';
-import Footer from '@components/Footer/Footer';
-import Card from '@ui/Card/Card';
+import { useState } from 'react';
+import Header from '../Header/Header';
+import Card from '../UI/Card/Card';
+import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 
 import styles from './App.module.css';
-import { useState } from 'react';
-import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 
 /**
  *

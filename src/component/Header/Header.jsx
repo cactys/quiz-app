@@ -1,4 +1,4 @@
-import Logo from '@ui/Logo/Logo';
+import Logo from '../UI/Logo/Logo';
 
 import styles from './Header.module.css';
 

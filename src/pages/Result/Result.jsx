@@ -1,6 +1,6 @@
-import Button from '@ui/Button/Button';
+import Button from '@/component/UI/Button/Button';
 
-import imageResult from '@assets/images/image__result.svg';
+import imageResult from '@assets/images/image__result.webp';
 import styles from './Result.module.css';
 
 /**

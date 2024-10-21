@@ -1,4 +1,4 @@
-import Button from '@ui/Button/Button';
+import Button from '@/component/UI/Button/Button';
 
 import styles from './Question.module.css';
 

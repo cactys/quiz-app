@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@UI/*": [
+        "./src/components/UI/*"
+      ]
+    }
+  }
+}

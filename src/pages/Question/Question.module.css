@@ -27,7 +27,7 @@
   font-size: 0;
   background-color: var(--color-white);
   cursor: pointer;
-  mask-image: url(@assets/images/icons/icons__40error.svg);
+  mask-image: url(../../assets/images/icons/icons__40error.svg);
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: cover;

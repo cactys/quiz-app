@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Counter from '@ui/Counter/Counter';
-import Button from '@ui/Button/Button';
+import Counter from '@/component/UI/Counter/Counter';
+import Button from '@/component/UI/Button/Button';
 
 import imageQuestion from '@assets/images/image__question.svg';
 import styles from './Welcome.module.css';
