@@ -2,12 +2,12 @@ import styles from './Counter.module.css';
 
 /**
  *
- * @param subtitle описание счетчика
- * @param count число счетчика
- * @param onChange onChange поля input
- * @param handleDecrementBtn onClick ручка кнопки "минус"
- * @param handleIncrementBtn onClick ручка кнопки "плюс"
- * @returns JSX.Element
+ * @param {string} subtitle описание счетчика
+ * @param {number} count число счетчика
+ * @param {() => void} onChange onChange поля input
+ * @param {()=> void} handleDecrementBtn onClick ручка кнопки "минус"
+ * @param {() => void} handleIncrementBtn onClick ручка кнопки "плюс"
+ * @returns {JSX.Element} JSX.Element
  */
 
 const Counter = ({
@@ -19,12 +19,12 @@ const Counter = ({
 }) => {
   return (
     <div className={styles.container}>
-      <label form="count" className={styles.subtitle}>
+      <label form="count" className={styles.container__subtitle}>
         {subtitle}
       </label>
-      <div className={styles.counterBlok}>
+      <div className={styles.container__block}>
         <button
-          className={`${styles.counterBtn} ${styles.decrementBtn}`}
+          className={`${styles.counter__btn} ${styles.container__btn_decrement}`}
           type="button"
           onClick={handleDecrementBtn}
         >
@@ -36,10 +36,10 @@ const Counter = ({
           name="count"
           value={count}
           onChange={onChange}
-          className={styles.counter}
+          className={styles.counter__input}
         />
         <button
-          className={`${styles.counterBtn} ${styles.incrementBtn}`}
+          className={`${styles.counter__btn} ${styles.container__btn_increment}`}
           type="button"
           onClick={handleIncrementBtn}
         >

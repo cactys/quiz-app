@@ -1,4 +1,4 @@
-.wrapper {
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,18 +7,18 @@
   padding: 0 0 20px;
 }
 
-.wrapper_answer {
+.button_answer {
   justify-content: space-between;
 }
 
-.buttonContainer {
+.button__container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.button {
+.button__btn {
   display: inline-block;
   min-width: 270px;
   border-radius: var(--radii);
@@ -32,12 +32,12 @@
   cursor: pointer;
 }
 
-.button_disabled {
+.button__btn_disabled {
   background-color: var(--btn-color-disable);
   cursor: default;
 }
 
-.subtitle {
+.button__subtitle {
   position: absolute;
   bottom: -20px;
   font-weight: var(--font-w-regular);
@@ -45,15 +45,15 @@
   line-height: var(--line-height-xs);
 }
 
-.subtitle_disabled {
+.button__subtitle_disabled {
   color: var(--text-btn-disable);
 }
 
-.span {
+.button__span {
   font-weight: var(--font-w-bold);
 }
 
-.answerCount {
+.button__answer-count {
   font-weight: var(--font-w-bold);
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);

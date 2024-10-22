@@ -1,24 +1,41 @@
+import { useContext, useEffect } from 'react';
 import styles from './Button.module.css';
+import { CorrectAnswerContext } from '@/contexts/CorrectAnswerContext';
 
 /**
- * @param handleButton ручка кнопки
- * @param title текст кнопки
- * @param htmlType тип кнопки
- * @returns JSX.Element
+ * @param {() => void} handleButton void function
+ * @param {string} title текст кнопки
+ * @param {string} htmlType тип кнопки
+ * @param {boolean} answerCount boolean
+ * @param {boolean} disabled boolean
+ * @returns {JSX.Element} JSX.Element
  */
 
 const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
+  const currentAnswer = useContext(CorrectAnswerContext);
+
+  useEffect(() => {
+    const handleEnter = (e) => {
+      if (!disabled && e.key === 'Enter') {
+        handleButton();
+      }
+    };
+
+    document.addEventListener('keydown', handleEnter);
+    return () => document.removeEventListener('keydown', handleEnter);
+  }, [handleButton]);
+
   return (
     <div
-      className={`${styles.wrapper} ${
-        answerCount ? styles.wrapper_answer : ''
+      className={`${styles.button} ${
+        answerCount ? styles.button_answer : ''
       }`}
     >
-      <div className={styles.buttonContainer}>
+      <div className={styles.button__container}>
         <button
           type={htmlType}
-          className={`${styles.button} ${
-            disabled ? styles.button_disabled : ''
+          className={`${styles.button__btn} ${
+            disabled ? styles.button__btn_disabled : ''
           }`}
           onClick={handleButton}
           disabled={disabled}
@@ -26,14 +43,16 @@ const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
           {title}
         </button>
         <p
-          className={`${styles.subtitle} ${
-            disabled ? styles.subtitle_disabled : ''
+          className={`${styles.button__subtitle} ${
+            disabled ? styles.button__subtitle_disabled : ''
           }`}
         >
-          или нажми <span className={styles.span}>Enter &#8629;</span>
+          или нажми <span className={styles.button__span}>Enter &#8629;</span>
         </p>
       </div>
-      {answerCount && <p className={styles.answerCount}>1 / 18</p>}
+      {answerCount && (
+        <p className={styles['button__answer-count']}>1 / {currentAnswer.question}</p>
+      )}
     </div>
   );
 };

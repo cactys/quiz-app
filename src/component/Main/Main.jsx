@@ -3,19 +3,33 @@ import Welcome from '@/pages/Welcome/Welcome';
 import Question from '@/pages/Question/Question';
 import Result from '@/pages/Result/Result';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-import { mockAnswers, mockQuestions } from '@/mock/mock';
+import { mockQuestions } from '@/mock/mock';
 
 import styles from './Main.module.css';
 
-const Main = ({ handleSwitchPage }) => {
+/**
+ *
+ * @param {() => void} handleSwitchPage void function
+ * @param {object} correctAnswers {question: number, incorrect: number, error: number}
+ * @param {() => void} setCountQuestion void function
+ * @returns {JSX.Element} JSX.Element
+ */
+
+const Main = ({ handleSwitchPage, correctAnswers, setCountQuestion }) => {
   const currentPage = useContext(CurrentPageContext);
 
   const pages = {
-    start: <Welcome handleSwitchPage={handleSwitchPage} />,
+    start: (
+      <Welcome
+        handleSwitchPage={handleSwitchPage}
+        correctAnswers={correctAnswers}
+        setCountQuestion={setCountQuestion}
+      />
+    ),
     question: (
       <Question {...mockQuestions} handleSwitchPage={handleSwitchPage} />
     ),
-    result: <Result {...mockAnswers} handleSwitchPage={handleSwitchPage} />,
+    result: <Result handleSwitchPage={handleSwitchPage} />,
   };
 
   return (

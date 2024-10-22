@@ -4,15 +4,15 @@ import logoImage from '@assets/logo__desktop.svg';
 
 /**
  *
- * @param title альтернативное название логотипа, аттрибут alt=?
- * @returns JSX.Element
+ * @param {string} title альтернативное название логотипа, аттрибут alt=?
+ * @returns {JSX.Element} JSX.Element
  */
 
 const Logo = ({ title }) => {
   return (
-    <a href="#" className={styles.link}>
+    <a href="#" className={styles.logo}>
       <img
-        className={styles.logoImage}
+        className={styles.logo__img}
         src={logoImage}
         alt={title}
         width={178}

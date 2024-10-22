@@ -2,18 +2,18 @@ import styles from './Footer.module.css';
 
 /**
  *
- * @returns JSX.Element
+ * @returns {JSX.Element} JSX.Element
  */
 
 const Footer = () => {
   return (
-    <footer className={styles.wrapper}>
-      <p className={styles.footerContent}>
+    <footer className={styles.footer}>
+      <p className={styles.footer__copy}>
         Проект выполнен в рамках стажировки{' '}
         <a
           href="https://preax.ru"
           target="_blank"
-          className={styles.footerLink}
+          className={styles.footer__link}
         >
           PREAX
         </a>

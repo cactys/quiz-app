@@ -1,25 +1,40 @@
-import { useState } from 'react';
 import Counter from '@/component/UI/Counter/Counter';
 import Button from '@/component/UI/Button/Button';
+import Card from '@/component/UI/Card/Card';
 
 import imageQuestion from '@assets/images/image__question.svg';
-import Card from '@/component/UI/Card/Card';
 
 /**
  *
- * @param {() => void} handleSwitchPage - функция для переключения страницы
+ * @param {() => void} handleSwitchPage функция для переключения страницы
+ * @param {object} correctAnswers {question: number, incorrect: number, error: number}
+ * @param {() => void} setCountQuestion void function
  * @returns {JSX.Element} JSX.Element
  */
 
-const Welcome = ({ handleSwitchPage }) => {
-  const [count, setCount] = useState(18);
-
-  const handleIncrementBtn = () => setCount((count) => parseInt(count) + 1);
+const Welcome = ({ handleSwitchPage, correctAnswers, setCountQuestion }) => {
+  const handleIncrementBtn = () =>
+    correctAnswers.question < 25
+      ? setCountQuestion({
+          ...correctAnswers,
+          question: correctAnswers.question + 1,
+        })
+      : setCountQuestion({
+          ...correctAnswers,
+          question: correctAnswers.question,
+        });
 
   const handleDecrementBtn = () =>
-    count > 1 ? setCount((count) => count - 1) : setCount(1);
+    correctAnswers.question > 1
+      ? setCountQuestion({
+          ...correctAnswers,
+          question: correctAnswers.question - 1,
+        })
+      : setCountQuestion({ ...correctAnswers, question: 1 });
 
-  const onChange = (e) => setCount(e.target.value);
+  const onChange = (e) => {
+    setCountQuestion({ ...correctAnswers, question: e.target.value });
+  };
 
   return (
     <>
@@ -37,7 +52,7 @@ const Welcome = ({ handleSwitchPage }) => {
       />
       <Counter
         subtitle="Выбери количество вопросов:"
-        count={count}
+        count={correctAnswers.question}
         handleIncrementBtn={handleIncrementBtn}
         handleDecrementBtn={handleDecrementBtn}
         onChange={onChange}

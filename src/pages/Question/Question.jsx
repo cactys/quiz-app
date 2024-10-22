@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import Button from '@/component/UI/Button/Button';
-
-import styles from './Question.module.css';
 import Card from '@/component/UI/Card/Card';
 
 /**
  *
- * @param question текст вопроса, string
- * @param image? URL картинки
- * @param answerOptions массив ответов
- * @returns JSX.Element
+ * @param {string} question текст вопроса
+ * @param {string} image URL картинки
+ * @param {[]} answerOptions массив ответов
+ * @param {() => void} handleSwitchPage void function
+ * @returns {JSX.Element} JSX.Element
  */
 
 const Question = (props) => {
@@ -26,10 +25,11 @@ const Question = (props) => {
   return (
     <>
       <Card
-        image={{ src: image, width: 90, height: 60 }}
+        image={{ src: image, width: 90, height: 60, placement: 'flex-start' }}
         subtitle={question}
         closeBtn={handleClose}
         answerOptions={answerOptions}
+        answerChoice={disableBtn}
         handleAnswerChoice={handleDisableBtn}
       />
       <Button

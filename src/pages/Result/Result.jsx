@@ -1,54 +1,26 @@
 import Button from '@/component/UI/Button/Button';
+import Card from '@/component/UI/Card/Card';
 
-import imageResult from '@assets/images/image__result.webp';
-import styles from './Result.module.css';
+import imageResult from '@assets/images/image__result.svg';
 
 /**
  *
- * @param answersCorrect все ответы верны boolean
- * @param answersPartiallyCorrect есть ошибки boolean
- * @param answersIncorrect не одного правильного ответа boolean
- * @param result количество верных / неверных ответов {key: value}
- * @returns JSX.Element
+ * @param {() => void} handleSwitchPage void function
+ * @returns {JSX.Element} JSX.Element
  */
 
-const Result = (props) => {
-  const { answersCorrect, answersPartiallyCorrect, answersIncorrect, result } =
-    props[0];
-  const { handleSwitchPage } = props;
-  
-  console.log(handleSwitchPage)
-
+const Result = ({ handleSwitchPage }) => {
   return (
     <>
-      <img
-        src={imageResult}
-        alt="Результат"
-        className={styles.image}
-        width={196}
-        height={196}
+      <Card
+        image={{
+          src: imageResult,
+          width: 196,
+          height: 196,
+          placement: 'center',
+        }}
+        title="Результат"
       />
-      <div className={styles.header}>
-        <h2 className={styles.title}>Результат</h2>
-        {answersCorrect && (
-          <p className={styles.subtitle}>
-            Ты ответил правильно на&nbsp;все&nbsp;вопросы. Так держать!
-          </p>
-        )}
-        {answersPartiallyCorrect && (
-          <p className={styles.subtitle}>
-            Ты ответил правильно на&nbsp;
-            <span className={styles.incorrect}>{result.incorrect}</span>
-            &nbsp;вопросов и сделал{' '}
-            <span className={styles.error}>{result.error}</span> ошибок.
-          </p>
-        )}
-        {answersIncorrect && (
-          <p className={styles.subtitle}>
-            Ты не ответил ни на один вопрос. Попробуй еще!
-          </p>
-        )}
-      </div>
       <Button
         title="Попробовать еще"
         htmlType="button"
