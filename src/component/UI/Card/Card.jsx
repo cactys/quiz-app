@@ -10,21 +10,11 @@ import styles from './Card.module.css';
  * @param {string} title string
  * @param {string} subtitle string
  * @param {() => void} closeBtn void function
- * @param {object} answerOptions {question: string, image: string, answerOptions: [], required: boolean}
- * @param {() => void} handleAnswerChoice void function
- * @param {boolean} answerChoice boolean
+ * @param {JSX.Element} answers JSX.Element
  * @returns {JSX.Element} JSX.Element
  */
 
-const Card = ({
-  image,
-  title,
-  subtitle,
-  closeBtn,
-  answerOptions,
-  handleAnswerChoice,
-  answerChoice,
-}) => {
+const Card = ({ image, title, subtitle, closeBtn, answers }) => {
   const currentPage = useContext(CurrentPageContext);
   const correctAnswers = useContext(CorrectAnswerContext);
 
@@ -77,20 +67,7 @@ const Card = ({
         )}
       </header>
       <div className={styles.card__body}>
-        {answerOptions && (
-          <ol className={styles.card__list}>
-            {answerOptions.map((answerOption, index) => (
-              <li key={index} className={styles.card__item}>
-                <button
-                  className={styles['card__item-btn']}
-                  onClick={handleAnswerChoice}
-                >
-                  {answerOption}
-                </button>
-              </li>
-            ))}
-          </ol>
-        )}
+        {answers}
         {currentPage === 'result' &&
           correctAnswers.incorrect === 0 &&
           correctAnswers.error > 0 && (

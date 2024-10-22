@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from '@/component/UI/Button/Button';
 import Card from '@/component/UI/Card/Card';
+import Answer from '@/component/UI/Answer/Answer';
 
 /**
  *
@@ -28,9 +29,7 @@ const Question = (props) => {
         image={{ src: image, width: 90, height: 60, placement: 'flex-start' }}
         subtitle={question}
         closeBtn={handleClose}
-        answerOptions={answerOptions}
-        answerChoice={disableBtn}
-        handleAnswerChoice={handleDisableBtn}
+        answers={<Answer />}
       />
       <Button
         title="Ответить"
