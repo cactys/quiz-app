@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import Welcome from '@/pages/Welcome/Welcome';
-import Question from '@/pages/Question/Question';
-import Result from '@/pages/Result/Result';
+import Welcome from '@pages/Welcome/Welcome';
+import Question from '@pages/Question/Question';
+import Result from '@pages/Result/Result';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { mockQuestions } from '@/mock/mock';
 

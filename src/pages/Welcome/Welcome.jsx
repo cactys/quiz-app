@@ -1,6 +1,6 @@
-import Counter from '@/component/UI/Counter/Counter';
-import Button from '@/component/UI/Button/Button';
-import Card from '@/component/UI/Card/Card';
+import Counter from '@UI/Counter/Counter';
+import Button from '@UI/Button/Button';
+import Card from '@UI/Card/Card';
 
 import imageQuestion from '@assets/images/image__question.svg';
 

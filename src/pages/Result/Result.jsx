@@ -1,5 +1,5 @@
-import Button from '@/component/UI/Button/Button';
-import Card from '@/component/UI/Card/Card';
+import Button from '@UI/Button/Button';
+import Card from '@UI/Card/Card';
 
 import imageResult from '@assets/images/image__result.svg';
 

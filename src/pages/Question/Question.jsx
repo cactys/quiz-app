@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Button from '@/component/UI/Button/Button';
-import Card from '@/component/UI/Card/Card';
-import Answer from '@/component/UI/Answer/Answer';
+import Button from '@UI/Button/Button';
+import Card from '@UI/Card/Card';
+import Answer from '@UI/Answer/Answer';
 
 /**
  *
