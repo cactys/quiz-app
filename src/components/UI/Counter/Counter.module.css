@@ -23,19 +23,24 @@
   border: none;
   border-radius: 50%;
   font-size: 0;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: var(--color-base);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: cover;
   cursor: pointer;
 }
 
+.counter__btn:disabled {
+  background-color: var(--color-alt);
+  cursor: default;
+}
+
 .container__btn_decrement {
-  background-image: url(../../../assets/images/icons/icons__60minus.svg);
+  mask-image: url(../../../assets/images/icons/icons__60minus.svg);
 }
 
 .container__btn_increment {
-  background-image: url(../../../assets/images/icons/icons__60plus.svg);
+  mask-image: url(../../../assets/images/icons/icons__60plus.svg);
 }
 
 .counter__input {
@@ -51,6 +56,11 @@
   line-height: var(--line-height-lg);
   text-align: center;
   background-color: transparent;
+}
+
+.counter__input:focus {
+  border: 4px solid var(--btn-color-active);
+  color: var(--btn-color-active);
 }
 
 /* Chrome, Safari, Edge, Opera */

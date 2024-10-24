@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-import { CorrectAnswerContext } from '@/contexts/CorrectAnswerContext';
+import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 import styles from './Card.module.css';
 
@@ -14,87 +14,84 @@ import styles from './Card.module.css';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Card = ({ image, title, subtitle, closeBtn, answers }) => {
+const Card = ({ image, title, subtitle, closeBtn, answers, question }) => {
   const currentPage = useContext(CurrentPageContext);
-  const correctAnswers = useContext(CorrectAnswerContext);
+  const { incorrect, error } = useContext(CounterQuestionsContext);
 
   return (
     <article className={styles.card}>
       {closeBtn && (
         <button className={styles['card__close-btn']} onClick={closeBtn} />
       )}
-      <figure
-        className={`${
-          image ? styles.card__figure : styles.card__figure_disable
-        }`}
-        style={{
-          justifyContent: image.placement,
-        }}
-      >
-        <img
-          src={image.src}
-          alt={title}
-          className={styles.card__image}
-          width={image.width}
-          height={image.height}
-          style={{
-            position: image.position,
-            top: image.top,
-            right: image.right,
-          }}
-        />
-      </figure>
-      <header
-        className={`${styles.card__header} ${
-          currentPage === 'question'
-            ? styles.card__header_place_question
-            : currentPage === 'result'
-            ? styles.card__header_place_result
-            : ''
-        }`}
-      >
-        {title && <h2 className={styles.card__title}>{title}</h2>}
-        {subtitle && (
-          <h3
-            className={`${styles.card__subtitle} ${
+      {question ? (
+        question
+      ) : (
+        <>
+          <figure
+            className={`${
+              image ? styles.card__figure : styles.card__figure_disable
+            }`}
+            style={{
+              justifyContent: image.placement,
+            }}
+          >
+            <img
+              src={image.src}
+              alt={title}
+              className={styles.card__image}
+              width={image.width}
+              height={image.height}
+              style={{
+                position: image.position,
+                top: image.top,
+                right: image.right,
+              }}
+            />
+          </figure>
+          <header
+            className={`${styles.card__header} ${
               currentPage === 'question'
-                ? styles.card__subtitle_place_question
+                ? styles.card__header_place_question
+                : currentPage === 'result'
+                ? styles.card__header_place_result
                 : ''
             }`}
           >
-            {subtitle}
-          </h3>
-        )}
-      </header>
+            {title && <h2 className={styles.card__title}>{title}</h2>}
+            {subtitle && (
+              <h3
+                className={`${styles.card__subtitle} ${
+                  currentPage === 'question'
+                    ? styles.card__subtitle_place_question
+                    : ''
+                }`}
+              >
+                {subtitle}
+              </h3>
+            )}
+          </header>
+        </>
+      )}
       <div className={styles.card__body}>
         {answers}
-        {currentPage === 'result' &&
-          correctAnswers.incorrect === 0 &&
-          correctAnswers.error > 0 && (
-            <p className={styles.card__copy}>
-              Ты не ответил ни на один вопрос. Попробуй еще!
-            </p>
-          )}
-        {currentPage === 'result' && correctAnswers.error === 0 && (
+        {currentPage === 'result' && incorrect === 0 && error > 0 && (
+          <p className={styles.card__copy}>
+            Ты не ответил ни на один вопрос. Попробуй еще!
+          </p>
+        )}
+        {currentPage === 'result' && error === 0 && (
           <p className={styles.card__copy}>
             Ты ответил правильно на&nbsp;все&nbsp;вопросы. Так держать!
           </p>
         )}
-        {currentPage === 'result' &&
-          correctAnswers.incorrect > 0 &&
-          correctAnswers.error > 0 && (
-            <p className={styles.card__copy}>
-              Ты ответил правильно на&nbsp;
-              <span className={styles.card__copy_incorrect}>
-                {correctAnswers.incorrect}
-              </span>
-              &nbsp;вопросов и сделал{' '}
-              <span className={styles.card__copy_error}>
-                {correctAnswers.error}
-              </span>{' '}
-              ошибок.
-            </p>
-          )}
+        {currentPage === 'result' && incorrect > 0 && error > 0 && (
+          <p className={styles.card__copy}>
+            Ты ответил правильно на&nbsp;
+            <span className={styles.card__copy_incorrect}>{incorrect}</span>
+            &nbsp;вопросов и сделал{' '}
+            <span className={styles.card__copy_error}>{error}</span> ошибок.
+          </p>
+        )}
       </div>
     </article>
   );

@@ -32,7 +32,7 @@
   cursor: pointer;
 }
 
-.button__btn_disabled {
+.button__btn:disabled {
   background-color: var(--btn-color-disable);
   cursor: default;
 }
@@ -59,4 +59,3 @@
   line-height: var(--line-height-m);
   text-align: right;
 }
-

@@ -1,11 +1,19 @@
-import React from 'react';
+import styles from './RadioButton.module.css';
 
-const RadioButton = ({ answer }) => {
+const RadioButton = ({ answer, index }) => {
   return (
-    <div>
-      <input id="answer" type="radio" value={answer} />
-      <label htmlFor="answer">{answer}</label>
-    </div>
+    <label className={styles.radio}>
+      <input
+        className={styles.radio__input}
+        id="answer"
+        type="radio"
+        name={answer}
+      />
+      <div className={styles.radio__new}>
+        <span className={styles.radio__index}>{index}</span>
+        <span className={styles.radio__label}>{answer}</span>
+      </div>
+    </label>
   );
 };
 

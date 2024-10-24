@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import Welcome from '@pages/Welcome/Welcome';
-import Question from '@pages/Question/Question';
+import Test from '@/pages/Test/Test';
 import Result from '@pages/Result/Result';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { mockQuestions } from '@/mock/mock';
@@ -15,19 +15,29 @@ import styles from './Main.module.css';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Main = ({ handleSwitchPage, correctAnswers, setCountQuestion }) => {
+const Main = ({
+  handleSwitchPage,
+  handleIncrementBtn,
+  handleDecrementBtn,
+  onChangeCounter,
+  setCurrentPage,
+}) => {
   const currentPage = useContext(CurrentPageContext);
 
   const pages = {
     start: (
       <Welcome
         handleSwitchPage={handleSwitchPage}
-        correctAnswers={correctAnswers}
-        setCountQuestion={setCountQuestion}
+        handleIncrementBtn={handleIncrementBtn}
+        handleDecrementBtn={handleDecrementBtn}
+        onChangeCounter={onChangeCounter}
       />
     ),
     question: (
-      <Question {...mockQuestions} handleSwitchPage={handleSwitchPage} />
+      <Test
+        handleSwitchPage={handleSwitchPage}
+        setCurrentPage={setCurrentPage}
+      />
     ),
     result: <Result handleSwitchPage={handleSwitchPage} />,
   };

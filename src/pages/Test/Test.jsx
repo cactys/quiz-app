@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '@UI/Button/Button';
 import Card from '@UI/Card/Card';
 import Answer from '@UI/Answer/Answer';
+import Question from '@/components/UI/Question/Question';
 
 /**
  *
@@ -12,22 +13,17 @@ import Answer from '@UI/Answer/Answer';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Question = (props) => {
+const Test = ({ handleSwitchPage, setCurrentPage }) => {
   const [disableBtn, setDisableBtn] = useState(true);
-  const { question, image, answerOptions } = props[0];
-  const { handleSwitchPage } = props;
 
-  const handleDisableBtn = () => {
-    setDisableBtn(!disableBtn);
+  const handleClose = () => {
+    setCurrentPage('start');
   };
-
-  const handleClose = () => {};
 
   return (
     <>
       <Card
-        image={{ src: image, width: 90, height: 60, placement: 'flex-start' }}
-        subtitle={question}
+        question={<Question />}
         closeBtn={handleClose}
         answers={<Answer />}
       />
@@ -42,4 +38,4 @@ const Question = (props) => {
   );
 };
 
-export default Question;
+export default Test;

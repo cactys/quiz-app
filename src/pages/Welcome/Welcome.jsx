@@ -3,6 +3,8 @@ import Button from '@UI/Button/Button';
 import Card from '@UI/Card/Card';
 
 import imageQuestion from '@assets/images/image__question.svg';
+import { useContext, useState } from 'react';
+import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 /**
  *
@@ -12,29 +14,14 @@ import imageQuestion from '@assets/images/image__question.svg';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Welcome = ({ handleSwitchPage, correctAnswers, setCountQuestion }) => {
-  const handleIncrementBtn = () =>
-    correctAnswers.question < 25
-      ? setCountQuestion({
-          ...correctAnswers,
-          question: correctAnswers.question + 1,
-        })
-      : setCountQuestion({
-          ...correctAnswers,
-          question: correctAnswers.question,
-        });
-
-  const handleDecrementBtn = () =>
-    correctAnswers.question > 1
-      ? setCountQuestion({
-          ...correctAnswers,
-          question: correctAnswers.question - 1,
-        })
-      : setCountQuestion({ ...correctAnswers, question: 1 });
-
-  const onChange = (e) => {
-    setCountQuestion({ ...correctAnswers, question: e.target.value });
-  };
+const Welcome = ({
+  handleSwitchPage,
+  handleIncrementBtn,
+  handleDecrementBtn,
+  onChangeCounter,
+}) => {
+  const { question } = useContext(CounterQuestionsContext);
+  const [disableBtn, setDisableBtn] = useState(false);
 
   return (
     <>
@@ -52,15 +39,17 @@ const Welcome = ({ handleSwitchPage, correctAnswers, setCountQuestion }) => {
       />
       <Counter
         subtitle="Выбери количество вопросов:"
-        count={correctAnswers.question}
+        count={question}
         handleIncrementBtn={handleIncrementBtn}
         handleDecrementBtn={handleDecrementBtn}
-        onChange={onChange}
+        onChangeCounter={onChangeCounter}
+        setDisableBtn={setDisableBtn}
       />
       <Button
         title="Начать"
         htmlType="button"
         handleButton={handleSwitchPage}
+        disabled={disableBtn}
       />
     </>
   );

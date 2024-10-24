@@ -1,12 +1,19 @@
-import React from 'react';
+import { useContext } from 'react';
 import RadioButton from '../RadioButton/RadioButton';
-import dataAnswer from '../../../../data/quizz_questions.json';
+
+import styles from './Answer.module.css';
+import { CurrentAnswerContext } from '@/contexts/CurrentAnswerContext';
 
 const Answer = () => {
-  const answer = dataAnswer.questions;
-  console.log(answer);
+  const { answers } = useContext(CurrentAnswerContext);
 
-  return <div>{<RadioButton answer={'кукушачка'} />}</div>;
+  return (
+    <fieldset className={styles.fieldset}>
+      {answers.map((answer, i) => (
+        <RadioButton answer={answer} index={i + 1} key={i} />
+      ))}
+    </fieldset>
+  );
 };
 
 export default Answer;

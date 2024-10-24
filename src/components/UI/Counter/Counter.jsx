@@ -1,4 +1,6 @@
+import { useContext, useEffect, useState } from 'react';
 import styles from './Counter.module.css';
+import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 /**
  *
@@ -12,11 +14,15 @@ import styles from './Counter.module.css';
 
 const Counter = ({
   subtitle,
-  count,
   handleDecrementBtn,
   handleIncrementBtn,
-  onChange,
+  onChangeCounter,
+  setDisableBtn,
 }) => {
+  const { question, minQuestion, maxQuestion } = useContext(
+    CounterQuestionsContext
+  );
+
   return (
     <div className={styles.container}>
       <label form="count" className={styles.container__subtitle}>
@@ -27,21 +33,26 @@ const Counter = ({
           className={`${styles.counter__btn} ${styles.container__btn_decrement}`}
           type="button"
           onClick={handleDecrementBtn}
+          disabled={question <= minQuestion}
         >
           Минус
         </button>
         <input
+          onFocus={(e) => console.log(e)}
           type="number"
           id="count"
           name="count"
-          value={count}
-          onChange={onChange}
+          value={question || ''}
+          min={minQuestion}
+          max={maxQuestion}
+          onChange={onChangeCounter}
           className={styles.counter__input}
         />
         <button
           className={`${styles.counter__btn} ${styles.container__btn_increment}`}
           type="button"
           onClick={handleIncrementBtn}
+          disabled={question >= maxQuestion}
         >
           Плюс
         </button>
