@@ -17,7 +17,6 @@ const Counter = ({
   handleDecrementBtn,
   handleIncrementBtn,
   onChangeCounter,
-  setDisableBtn,
 }) => {
   const { question, minQuestion, maxQuestion } = useContext(
     CounterQuestionsContext
@@ -38,7 +37,6 @@ const Counter = ({
           Минус
         </button>
         <input
-          onFocus={(e) => console.log(e)}
           type="number"
           id="count"
           name="count"

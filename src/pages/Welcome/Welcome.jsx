@@ -15,13 +15,12 @@ import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
  */
 
 const Welcome = ({
-  handleSwitchPage,
+  handleStartTest,
   handleIncrementBtn,
   handleDecrementBtn,
   onChangeCounter,
 }) => {
   const { question } = useContext(CounterQuestionsContext);
-  const [disableBtn, setDisableBtn] = useState(false);
 
   return (
     <>
@@ -43,13 +42,11 @@ const Welcome = ({
         handleIncrementBtn={handleIncrementBtn}
         handleDecrementBtn={handleDecrementBtn}
         onChangeCounter={onChangeCounter}
-        setDisableBtn={setDisableBtn}
       />
       <Button
         title="Начать"
         htmlType="button"
-        handleButton={handleSwitchPage}
-        disabled={disableBtn}
+        handleButton={handleStartTest}
       />
     </>
   );

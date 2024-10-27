@@ -10,7 +10,7 @@ import logoImage from '@assets/logo__desktop.svg';
 
 const Logo = ({ title }) => {
   return (
-    <a href="#" className={styles.logo}>
+    <a href="/" className={styles.logo}>
       <img
         className={styles.logo__img}
         src={logoImage}

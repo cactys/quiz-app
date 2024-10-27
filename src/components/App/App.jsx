@@ -4,7 +4,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
-import { CurrentAnswerContext } from '@/contexts/CurrentAnswerContext';
+import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { getRandomQuestion } from '@/utils/utils';
 
 import data from '../../../data/quizz_questions.json';
@@ -20,24 +20,45 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState('start');
   const [counterQuestions, setCounterQuestions] = useState({
     question: 1,
+    currentQuestion: 1,
     incorrect: 0,
     error: 0,
     minQuestion: 1,
     maxQuestion: data.questions.length,
   });
-  const currentQuestion = getRandomQuestion(
-    data.questions[Math.floor(Math.random() * data.questions.length)],
-    data.countries
-  );
+  const [disableBtn, setDisableBtn] = useState(true);
+  const [currentQuestions, setCurrentQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState({});
 
-  const handleSwitchPage = () => {
-    setCurrentPage(
-      currentPage === 'start'
-        ? 'question'
-        : currentPage === 'question'
-        ? 'result'
-        : 'start'
-    );
+  const handleStartTest = () => {
+    setCurrentPage(`question#${counterQuestions.currentQuestion}`);
+  };
+
+  const handleSwitchQuestion = () => {
+    if (counterQuestions.currentQuestion < counterQuestions.question) {
+      setCounterQuestions({
+        ...counterQuestions,
+        currentQuestion: ++counterQuestions.currentQuestion,
+      });
+      setCurrentPage(`question#${counterQuestions.currentQuestion}`);
+      setCurrentQuestion(currentQuestions[counterQuestions.currentQuestion]);
+      console.log(currentQuestion);
+    } else {
+      setCurrentPage('result');
+    }
+  };
+
+  const handleStartOver = () => {
+    setCurrentPage('start');
+    setCounterQuestions({
+      question: 1,
+      currentQuestion: 1,
+      incorrect: 0,
+      error: 0,
+      minQuestion: 1,
+      maxQuestion: data.questions.length,
+    });
+    setCurrentQuestions([]);
   };
 
   const handleIncrementBtn = () =>
@@ -66,6 +87,12 @@ const App = () => {
     setCounterQuestions({ ...counterQuestions, question: e.target.value });
   };
 
+  const handleChangeAnswer = (answer) => {
+    if (answer) {
+      setDisableBtn(false);
+    }
+  };
+
   useEffect(() => {
     counterQuestions.question >= counterQuestions.maxQuestion
       ? setCounterQuestions({
@@ -76,23 +103,46 @@ const App = () => {
           ...counterQuestions,
           question: counterQuestions.question,
         });
+  }, [setCounterQuestions]);
+
+  useEffect(() => {
+    setCurrentQuestions(
+      Array(counterQuestions.question).fill(
+        getRandomQuestion(
+          data.questions[Math.floor(Math.random() * data.questions.length)],
+          data.countries
+        )
+      )
+    );
   }, [counterQuestions.question]);
+
+  useEffect(() => {
+    setCurrentQuestion(currentQuestions[counterQuestions.currentQuestion - 1]);
+  }, [counterQuestions]);
+
+  console.log(counterQuestions.currentQuestion);
+  console.log(currentQuestions);
+  console.log(currentQuestion);
 
   return (
     <div className={styles.page}>
       <Header />
       <CurrentPageContext.Provider value={currentPage}>
-        <CurrentAnswerContext.Provider value={currentQuestion}>
+        <CurrentQuestionContext.Provider value={currentQuestion}>
           <CounterQuestionsContext.Provider value={counterQuestions}>
             <Main
-              handleSwitchPage={handleSwitchPage}
+              handleStartTest={handleStartTest}
               handleIncrementBtn={handleIncrementBtn}
               handleDecrementBtn={handleDecrementBtn}
               onChangeCounter={onChangeCounter}
               setCurrentPage={setCurrentPage}
+              disableBtn={disableBtn}
+              onChangeAnswer={handleChangeAnswer}
+              handleSwitchQuestion={handleSwitchQuestion}
+              handleStartOver={handleStartOver}
             />
           </CounterQuestionsContext.Provider>
-        </CurrentAnswerContext.Provider>
+        </CurrentQuestionContext.Provider>
       </CurrentPageContext.Provider>
       <Footer />
     </div>

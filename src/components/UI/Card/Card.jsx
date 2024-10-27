@@ -50,25 +50,11 @@ const Card = ({ image, title, subtitle, closeBtn, answers, question }) => {
           </figure>
           <header
             className={`${styles.card__header} ${
-              currentPage === 'question'
-                ? styles.card__header_place_question
-                : currentPage === 'result'
-                ? styles.card__header_place_result
-                : ''
+              currentPage === 'result' ? styles.card__header_place_result : ''
             }`}
           >
             {title && <h2 className={styles.card__title}>{title}</h2>}
-            {subtitle && (
-              <h3
-                className={`${styles.card__subtitle} ${
-                  currentPage === 'question'
-                    ? styles.card__subtitle_place_question
-                    : ''
-                }`}
-              >
-                {subtitle}
-              </h3>
-            )}
+            {subtitle && <h3 className={styles.card__subtitle}>{subtitle}</h3>}
           </header>
         </>
       )}

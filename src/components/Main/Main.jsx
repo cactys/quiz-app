@@ -6,6 +6,7 @@ import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { mockQuestions } from '@/mock/mock';
 
 import styles from './Main.module.css';
+import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 /**
  *
@@ -16,30 +17,38 @@ import styles from './Main.module.css';
  */
 
 const Main = ({
-  handleSwitchPage,
+  handleStartTest,
+  handleSwitchQuestion,
   handleIncrementBtn,
   handleDecrementBtn,
   onChangeCounter,
   setCurrentPage,
+  disableBtn,
+  onChangeAnswer,
+  handleStartOver,
 }) => {
   const currentPage = useContext(CurrentPageContext);
+  const counterQuestions = useContext(CounterQuestionsContext);
 
   const pages = {
     start: (
       <Welcome
-        handleSwitchPage={handleSwitchPage}
+        handleStartTest={handleStartTest}
         handleIncrementBtn={handleIncrementBtn}
         handleDecrementBtn={handleDecrementBtn}
         onChangeCounter={onChangeCounter}
       />
     ),
-    question: (
+    [`question#${counterQuestions.currentQuestion}`]: (
       <Test
-        handleSwitchPage={handleSwitchPage}
+        handleSwitchQuestion={handleSwitchQuestion}
         setCurrentPage={setCurrentPage}
+        disableBtn={disableBtn}
+        onChangeAnswer={onChangeAnswer}
+        handleClose={handleStartOver}
       />
     ),
-    result: <Result handleSwitchPage={handleSwitchPage} />,
+    result: <Result handleStartOver={handleStartOver} />,
   };
 
   return (

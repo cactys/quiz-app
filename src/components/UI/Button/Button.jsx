@@ -34,6 +34,10 @@ const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
     }
   }, [question]);
 
+  useEffect(() => {
+    setDisabledBtn(disabled);
+  }, [disabled]);
+
   return (
     <div
       className={`${styles.button} ${answerCount ? styles.button_answer : ''}`}

@@ -13,26 +13,27 @@ import Question from '@/components/UI/Question/Question';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Test = ({ handleSwitchPage, setCurrentPage }) => {
-  const [disableBtn, setDisableBtn] = useState(true);
-
-  const handleClose = () => {
-    setCurrentPage('start');
-  };
+const Test = ({
+  handleSwitchQuestion,
+  setCurrentPage,
+  disableBtn,
+  onChangeAnswer,
+  handleClose
+}) => {
 
   return (
     <>
       <Card
         question={<Question />}
         closeBtn={handleClose}
-        answers={<Answer />}
+        answers={<Answer onChangeAnswer={onChangeAnswer} />}
       />
       <Button
         title="Ответить"
         htmlType="button"
         answerCount={true}
         disabled={disableBtn}
-        handleButton={handleSwitchPage}
+        handleButton={handleSwitchQuestion}
       />
     </>
   );

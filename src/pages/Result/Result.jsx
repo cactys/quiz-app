@@ -9,7 +9,7 @@ import imageResult from '@assets/images/image__result.svg';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Result = ({ handleSwitchPage }) => {
+const Result = ({ handleStartOver }) => {
   return (
     <>
       <Card
@@ -24,7 +24,7 @@ const Result = ({ handleSwitchPage }) => {
       <Button
         title="Попробовать еще"
         htmlType="button"
-        handleButton={handleSwitchPage}
+        handleButton={handleStartOver}
       />
     </>
   );

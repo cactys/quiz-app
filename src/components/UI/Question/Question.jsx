@@ -1,25 +1,23 @@
 import { useContext } from 'react';
 import styles from './Question.module.css';
-import { CurrentAnswerContext } from '@/contexts/CurrentAnswerContext';
+import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 
 const Question = () => {
-  const { question } = useContext(CurrentAnswerContext);
+  const { question } = useContext(CurrentQuestionContext);
 
   return (
     <>
-      <figure className={styles.card__figure}>
+      <figure className={styles.figure}>
         <img
-          src={question.flag}
-          alt={question.question}
-          className={styles.card__image}
+          src={question?.flag}
+          alt={question?.question}
+          className={styles.figure__image}
           width={90}
           height={60}
         />
       </figure>
-      <header className={styles.card__header_place_question}>
-        <h3 className={styles.card__subtitle_place_question}>
-          {question.question}
-        </h3>
+      <header className={styles.header}>
+        <h3 className={styles.header__title}>{question?.question}</h3>
       </header>
     </>
   );

@@ -1,0 +1,17 @@
+.figure {
+  display: flex;
+}
+
+.figure__image {
+  border-radius: var(--radii);
+}
+
+.header {
+  margin: 16px 0 32px;
+}
+
+.header__title {
+  font-weight: var(--font-w-medium);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
