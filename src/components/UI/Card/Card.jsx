@@ -10,13 +10,13 @@ import styles from './Card.module.css';
  * @param {string} title string
  * @param {string} subtitle string
  * @param {() => void} closeBtn void function
- * @param {JSX.Element} answers JSX.Element
+ * @param {JSX.Element} question JSX.Element
+ * @param {JSX.Element} children JSX.Element
  * @returns {JSX.Element} JSX.Element
  */
 
-const Card = ({ image, title, subtitle, closeBtn, answers, question, children }) => {
+const Card = ({ image, title, subtitle, closeBtn, question, children }) => {
   const { currentPage } = useContext(CurrentPageContext);
-  const { incorrect, error } = useContext(CounterQuestionsContext);
 
   return (
     <article className={styles.card}>
@@ -58,9 +58,7 @@ const Card = ({ image, title, subtitle, closeBtn, answers, question, children })
           </header>
         </>
       )}
-      <div className={styles.card__body}>
-        {children}
-      </div>
+      <div className={styles.card__body}>{children}</div>
     </article>
   );
 };

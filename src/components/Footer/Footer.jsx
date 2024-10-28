@@ -2,7 +2,7 @@ import styles from './Footer.module.css';
 
 /**
  *
- * @returns {JSX.Element} JSX.Element
+ * @returns {JSX.Element} JSX.Element - Footer component
  */
 
 const Footer = () => {

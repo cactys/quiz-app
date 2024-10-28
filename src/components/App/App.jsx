@@ -1,18 +1,18 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
+import { QuestionsContext } from '@/contexts/QuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
+import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 import { getRandomQuestion } from '@/utils/utils';
 
 import styles from './App.module.css';
-import { QuestionsContext } from '@/contexts/QuestionsContext';
 
 /**
- *
- * @returns {JSX.Element} JSX.Element
+ * @returns {JSX.Element} JSX.Element App.jsx
  */
 
 const App = () => {
@@ -58,24 +58,23 @@ const App = () => {
     [currentQuestion, allQuestion]
   );
 
-  console.log(currentPage);
+  const valueButtonStatusContext = useMemo(
+    () => ({ disableBtn, setDisableBtn }),
+    [disableBtn]
+  );
 
   return (
     <div className={styles.page}>
       <Header />
-      <QuestionsContext.Provider value={data}>
-        <CurrentPageContext.Provider value={valueCurrentPageContext}>
-          <CounterQuestionsContext.Provider
-            value={valueCounterQuestionsContext}
-          >
-            <CurrentQuestionContext.Provider
-              value={valueCurrentQuestionContext}
-            >
-              <Main disableBtn={disableBtn} setDisableBtn={setDisableBtn} />
-            </CurrentQuestionContext.Provider>
-          </CounterQuestionsContext.Provider>
-        </CurrentPageContext.Provider>
-      </QuestionsContext.Provider>
+      <CurrentPageContext.Provider value={valueCurrentPageContext}>
+        <CounterQuestionsContext.Provider value={valueCounterQuestionsContext}>
+          <CurrentQuestionContext.Provider value={valueCurrentQuestionContext}>
+            <ButtonStatusContext.Provider value={valueButtonStatusContext}>
+              <Main />
+            </ButtonStatusContext.Provider>
+          </CurrentQuestionContext.Provider>
+        </CounterQuestionsContext.Provider>
+      </CurrentPageContext.Provider>
       <Footer />
     </div>
   );

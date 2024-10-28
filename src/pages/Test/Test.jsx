@@ -7,42 +7,37 @@ import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { QuestionsContext } from '@/contexts/QuestionsContext';
-import { getRandomQuestion } from '@/utils/utils';
+import { getRandomInt, getRandomQuestion } from '@/utils/utils';
+import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
 /**
  *
- * @param {string} question текст вопроса
- * @param {string} image URL картинки
- * @param {[]} answerOptions массив ответов
- * @param {() => void} handleSwitchPage void function
  * @returns {JSX.Element} JSX.Element
  */
 
-const Test = ({ disableBtn, setDisableBtn }) => {
+const Test = () => {
   const data = useContext(QuestionsContext);
   const { setCurrentPage } = useContext(CurrentPageContext);
   const { counterQuestions, setCounterQuestions } = useContext(
     CounterQuestionsContext
   );
-  const { setCurrentQuestion, allQuestion, setAllQuestion } =
-    useContext(CurrentQuestionContext);
+  const { setAllQuestion } = useContext(CurrentQuestionContext);
+  const { setDisableBtn } = useContext(ButtonStatusContext);
+  const [currentAnswer, setCurrentAnswer] = useState('');
 
   const handleSwitchQuestion = () => {
-    if (counterQuestions.questionNumber < counterQuestions.question) {
-      setCounterQuestions({
-        ...counterQuestions,
-        questionNumber: ++counterQuestions.questionNumber,
-      });
-      setCurrentPage(`question#${counterQuestions.questionNumber}`);
-      setCurrentQuestion(allQuestion[counterQuestions.questionNumber - 1]);
-    } else {
-      setCurrentPage('result');
-    }
+    setCurrentPage('result');
+    setCounterQuestions({
+      ...counterQuestions,
+      incorrect: getRandomInt(0, 4),
+      error: getRandomInt(0, 4),
+    });
   };
 
   const handleChangeAnswer = (answer) => {
     if (answer) {
       setDisableBtn(false);
+      setCurrentAnswer(answer);
     }
   };
 
@@ -64,6 +59,10 @@ const Test = ({ disableBtn, setDisableBtn }) => {
     ]);
   };
 
+  useEffect(() => {
+    setDisableBtn(!currentAnswer);
+  }, [currentAnswer]);
+
   return (
     <>
       <Card question={<Question />} closeBtn={handleStartOver}>
@@ -73,7 +72,6 @@ const Test = ({ disableBtn, setDisableBtn }) => {
         title="Ответить"
         htmlType="button"
         answerCount={true}
-        disabled={disableBtn}
         handleButton={handleSwitchQuestion}
       />
     </>

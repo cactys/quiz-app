@@ -1,20 +1,18 @@
+import { useContext, useEffect, useState } from 'react';
 import Counter from '@UI/Counter/Counter';
 import Button from '@UI/Button/Button';
 import Card from '@UI/Card/Card';
-
-import imageQuestion from '@assets/images/image__question.svg';
-import { useContext, useEffect, useState } from 'react';
+import { QuestionsContext } from '@/contexts/QuestionsContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { getRandomQuestion } from '@/utils/utils';
-import { QuestionsContext } from '@/contexts/QuestionsContext';
+
+import imageQuestion from '@assets/images/image__question.svg';
+import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
 /**
  *
- * @param {() => void} handleSwitchPage функция для переключения страницы
- * @param {object} correctAnswers {question: number, incorrect: number, error: number}
- * @param {() => void} setCountQuestion void function
  * @returns {JSX.Element} JSX.Element
  */
 
@@ -26,6 +24,7 @@ const Welcome = () => {
   const { setCurrentPage } = useContext(CurrentPageContext);
   const { currentQuestion, setCurrentQuestion, allQuestion, setAllQuestion } =
     useContext(CurrentQuestionContext);
+  const { disableBtn, setDisableBtn } = useContext(ButtonStatusContext);
 
   const handleStartTest = () => {
     setCurrentPage(`question#${counterQuestions.questionNumber}`);
@@ -77,11 +76,19 @@ const Welcome = () => {
           ...counterQuestions,
           question: counterQuestions.question,
         });
-  }, [setCounterQuestions]);
+  }, [counterQuestions.question, setCounterQuestions]);
 
   useEffect(() => {
     setCurrentQuestion(allQuestion[counterQuestions.questionNumber - 1]);
   }, [counterQuestions.questionNumber, currentQuestion]);
+
+  useEffect(() => {
+    if (counterQuestions.question <= 0 || !counterQuestions.question) {
+      setDisableBtn(true);
+    } else {
+      setDisableBtn(false);
+    }
+  }, [disableBtn, counterQuestions.question]);
 
   return (
     <>

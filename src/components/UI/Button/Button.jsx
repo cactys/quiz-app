@@ -1,42 +1,35 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './Button.module.css';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
+import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
 /**
- * @param {() => void} handleButton void function
  * @param {string} title текст кнопки
  * @param {string} htmlType тип кнопки
  * @param {boolean} answerCount boolean
- * @param {boolean} disabled boolean
+ * @param {() => void} handleButton void function
  * @returns {JSX.Element} JSX.Element
  */
 
-const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
+const Button = ({ title, htmlType, answerCount, handleButton }) => {
   const { counterQuestions } = useContext(CounterQuestionsContext);
-  const [disabledBtn, setDisabledBtn] = useState(disabled);
+
+  const { disableBtn, setDisableBtn } = useContext(ButtonStatusContext);
+
+  useEffect(() => {
+    setDisableBtn(disableBtn);
+  }, [disableBtn]);
 
   useEffect(() => {
     const handleEnter = (e) => {
-      if (!disabledBtn && e.key === 'Enter') {
+      if (!disableBtn && e.key === 'Enter') {
         handleButton();
       }
     };
 
     document.addEventListener('keydown', handleEnter);
     return () => document.removeEventListener('keydown', handleEnter);
-  }, [handleButton]);
-
-  useEffect(() => {
-    if (counterQuestions.question <= 0 || !counterQuestions.question) {
-      setDisabledBtn(true);
-    } else {
-      setDisabledBtn(disabled);
-    }
-  }, [counterQuestions.question]);
-
-  useEffect(() => {
-    setDisabledBtn(disabled);
-  }, [disabled]);
+  }, [disableBtn, handleButton]);
 
   return (
     <div
@@ -47,13 +40,13 @@ const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
           type={htmlType}
           className={styles.button__btn}
           onClick={handleButton}
-          disabled={disabledBtn}
+          disabled={disableBtn}
         >
           {title}
         </button>
         <p
           className={`${styles.button__subtitle} ${
-            disabledBtn ? styles.button__subtitle_disabled : ''
+            disableBtn ? styles.button__subtitle_disabled : ''
           }`}
         >
           или нажми <span className={styles.button__span}>Enter &#8629;</span>

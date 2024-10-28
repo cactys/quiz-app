@@ -1,3 +1,10 @@
+/**
+ *
+ * @param {object} question {question: string, correctAnswer: string, flag:string}
+ * @param {Array} answers [string]
+ * @returns
+ */
+
 export const getRandomQuestion = (question, answers) => {
   const answerList = new Array();
 
@@ -14,4 +21,17 @@ export const getRandomQuestion = (question, answers) => {
     question: question,
     answers: answerList.sort(() => 0.5 - Math.random()),
   };
+};
+
+/**
+ *
+ * @param {number} min
+ * @param {number} max
+ * @returns {} random number
+ */
+
+export const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
 };

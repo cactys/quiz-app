@@ -4,8 +4,8 @@ import logoImage from '@assets/logo__desktop.svg';
 
 /**
  *
- * @param {string} title альтернативное название логотипа, аттрибут alt=?
- * @returns {JSX.Element} JSX.Element
+ * @param {string} title - Title of the page
+ * @returns {JSX.Element} JSX.Element - Logo component
  */
 
 const Logo = ({ title }) => {

@@ -9,6 +9,7 @@ import Card from '@UI/Card/Card';
 import imageResult from '@assets/images/image__result.svg';
 import styles from './Result.module.css';
 import { useContext } from 'react';
+import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
 const Result = () => {
   const data = useContext(QuestionsContext);
@@ -17,6 +18,7 @@ const Result = () => {
     CounterQuestionsContext
   );
   const { setAllQuestion } = useContext(CurrentQuestionContext);
+  const { setDisableBtn } = useContext(ButtonStatusContext);
 
   const handleStartOver = () => {
     setCurrentPage('start');
@@ -34,6 +36,17 @@ const Result = () => {
         data.countries
       ),
     ]);
+    setDisableBtn(true);
+  };
+
+  const handleIncorrectIncline = (number, incorrect) => {
+    const lastNumber = number % 10;
+    if (number > 10 && [11, 12, 13, 14].includes(number % 100))
+      return incorrect ? 'вопросов' : 'ошибок';
+    if (lastNumber === 1) return incorrect ? 'вопрос' : 'ошибку';
+    if ([2, 3, 4].includes(lastNumber)) return incorrect ? 'вопроса' : 'ошибки';
+    if ([5, 6, 7, 8, 9, 0].includes(lastNumber))
+      return incorrect ? 'вопросов' : 'ошибок';
   };
 
   return (
@@ -63,11 +76,12 @@ const Result = () => {
             <span className={styles.result_incorrect}>
               {counterQuestions.incorrect}
             </span>
-            &nbsp;вопросов и сделал{' '}
+            &nbsp;
+            {handleIncorrectIncline(counterQuestions.incorrect, true)} и сделал{' '}
             <span className={styles.result_error}>
               {counterQuestions.error}
             </span>{' '}
-            ошибок.
+            {handleIncorrectIncline(counterQuestions.error)}.
           </p>
         )}
       </Card>

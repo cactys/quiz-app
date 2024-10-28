@@ -1,4 +1,13 @@
+import { useEffect } from 'react';
 import styles from './RadioButton.module.css';
+
+/**
+ *
+ * @param {string} answer string with answer text
+ * @param {number} index index of answer
+ * @param {(arg0: string) => void} onChangeAnswer function to change answer value
+ * @returns
+ */
 
 const RadioButton = ({ answer, index, onChangeAnswer }) => {
   const handleChangeAnswer = () => {
