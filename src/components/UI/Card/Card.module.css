@@ -50,18 +50,3 @@
   line-height: var(--line-height-base);
   text-align: center;
 }
-
-.card__copy {
-  margin: 16px 0 0;
-  text-align: center;
-}
-
-.card__copy_incorrect {
-  color: var(--color-green);
-  font-weight: var(--font-w-bold);
-}
-
-.card__copy_error {
-  color: var(--color-red);
-  font-weight: var(--font-w-bold);
-}

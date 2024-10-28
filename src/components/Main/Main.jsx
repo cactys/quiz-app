@@ -16,39 +16,16 @@ import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Main = ({
-  handleStartTest,
-  handleSwitchQuestion,
-  handleIncrementBtn,
-  handleDecrementBtn,
-  onChangeCounter,
-  setCurrentPage,
-  disableBtn,
-  onChangeAnswer,
-  handleStartOver,
-}) => {
-  const currentPage = useContext(CurrentPageContext);
-  const counterQuestions = useContext(CounterQuestionsContext);
+const Main = ({ disableBtn, setDisableBtn }) => {
+  const { currentPage } = useContext(CurrentPageContext);
+  const { counterQuestions } = useContext(CounterQuestionsContext);
 
   const pages = {
-    start: (
-      <Welcome
-        handleStartTest={handleStartTest}
-        handleIncrementBtn={handleIncrementBtn}
-        handleDecrementBtn={handleDecrementBtn}
-        onChangeCounter={onChangeCounter}
-      />
+    start: <Welcome />,
+    [`question#${counterQuestions.questionNumber}`]: (
+      <Test disableBtn={disableBtn} setDisableBtn={setDisableBtn} />
     ),
-    [`question#${counterQuestions.currentQuestion}`]: (
-      <Test
-        handleSwitchQuestion={handleSwitchQuestion}
-        setCurrentPage={setCurrentPage}
-        disableBtn={disableBtn}
-        onChangeAnswer={onChangeAnswer}
-        handleClose={handleStartOver}
-      />
-    ),
-    result: <Result handleStartOver={handleStartOver} />,
+    result: <Result />,
   };
 
   return (

@@ -12,7 +12,7 @@ import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
  */
 
 const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
-  const { question } = useContext(CounterQuestionsContext);
+  const { counterQuestions } = useContext(CounterQuestionsContext);
   const [disabledBtn, setDisabledBtn] = useState(disabled);
 
   useEffect(() => {
@@ -27,12 +27,12 @@ const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
   }, [handleButton]);
 
   useEffect(() => {
-    if (question <= 0 || !question) {
+    if (counterQuestions.question <= 0 || !counterQuestions.question) {
       setDisabledBtn(true);
     } else {
       setDisabledBtn(disabled);
     }
-  }, [question]);
+  }, [counterQuestions.question]);
 
   useEffect(() => {
     setDisabledBtn(disabled);
@@ -60,7 +60,9 @@ const Button = ({ title, htmlType, handleButton, answerCount, disabled }) => {
         </p>
       </div>
       {answerCount && (
-        <p className={styles['button__answer-count']}>1 / {question}</p>
+        <p className={styles['button__answer-count']}>
+          {counterQuestions.questionNumber} / {counterQuestions.question}
+        </p>
       )}
     </div>
   );

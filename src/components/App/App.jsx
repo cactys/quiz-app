@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -7,9 +7,8 @@ import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { getRandomQuestion } from '@/utils/utils';
 
-import data from '../../../data/quizz_questions.json';
-
 import styles from './App.module.css';
+import { QuestionsContext } from '@/contexts/QuestionsContext';
 
 /**
  *
@@ -17,133 +16,66 @@ import styles from './App.module.css';
  */
 
 const App = () => {
+  const data = useContext(QuestionsContext);
   const [currentPage, setCurrentPage] = useState('start');
   const [counterQuestions, setCounterQuestions] = useState({
     question: 1,
-    currentQuestion: 1,
+    questionNumber: 1,
     incorrect: 0,
     error: 0,
     minQuestion: 1,
     maxQuestion: data.questions.length,
   });
   const [disableBtn, setDisableBtn] = useState(true);
-  const [currentQuestions, setCurrentQuestions] = useState([]);
+  const [allQuestion, setAllQuestion] = useState([
+    getRandomQuestion(
+      data.questions[Math.floor(Math.random() * data.questions.length)],
+      data.countries
+    ),
+  ]);
   const [currentQuestion, setCurrentQuestion] = useState({});
 
-  const handleStartTest = () => {
-    setCurrentPage(`question#${counterQuestions.currentQuestion}`);
-  };
+  const valueCurrentPageContext = useMemo(
+    () => ({
+      currentPage,
+      setCurrentPage,
+    }),
+    [currentPage]
+  );
 
-  const handleSwitchQuestion = () => {
-    if (counterQuestions.currentQuestion < counterQuestions.question) {
-      setCounterQuestions({
-        ...counterQuestions,
-        currentQuestion: ++counterQuestions.currentQuestion,
-      });
-      setCurrentPage(`question#${counterQuestions.currentQuestion}`);
-      setCurrentQuestion(currentQuestions[counterQuestions.currentQuestion]);
-      console.log(currentQuestion);
-    } else {
-      setCurrentPage('result');
-    }
-  };
+  const valueCounterQuestionsContext = useMemo(
+    () => ({ counterQuestions, setCounterQuestions }),
+    [counterQuestions]
+  );
 
-  const handleStartOver = () => {
-    setCurrentPage('start');
-    setCounterQuestions({
-      question: 1,
-      currentQuestion: 1,
-      incorrect: 0,
-      error: 0,
-      minQuestion: 1,
-      maxQuestion: data.questions.length,
-    });
-    setCurrentQuestions([]);
-  };
+  const valueCurrentQuestionContext = useMemo(
+    () => ({
+      currentQuestion,
+      setCurrentQuestion,
+      allQuestion,
+      setAllQuestion,
+    }),
+    [currentQuestion, allQuestion]
+  );
 
-  const handleIncrementBtn = () =>
-    counterQuestions.question < counterQuestions.maxQuestion
-      ? setCounterQuestions({
-          ...counterQuestions,
-          question: ++counterQuestions.question,
-        })
-      : setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.question,
-        });
-
-  const handleDecrementBtn = () =>
-    counterQuestions.question > counterQuestions.minQuestion
-      ? setCounterQuestions({
-          ...counterQuestions,
-          question: --counterQuestions.question,
-        })
-      : setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.minQuestion,
-        });
-
-  const onChangeCounter = (e) => {
-    setCounterQuestions({ ...counterQuestions, question: e.target.value });
-  };
-
-  const handleChangeAnswer = (answer) => {
-    if (answer) {
-      setDisableBtn(false);
-    }
-  };
-
-  useEffect(() => {
-    counterQuestions.question >= counterQuestions.maxQuestion
-      ? setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.maxQuestion,
-        })
-      : setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.question,
-        });
-  }, [setCounterQuestions]);
-
-  useEffect(() => {
-    setCurrentQuestions(
-      Array(counterQuestions.question).fill(
-        getRandomQuestion(
-          data.questions[Math.floor(Math.random() * data.questions.length)],
-          data.countries
-        )
-      )
-    );
-  }, [counterQuestions.question]);
-
-  useEffect(() => {
-    setCurrentQuestion(currentQuestions[counterQuestions.currentQuestion - 1]);
-  }, [counterQuestions]);
-
-  console.log(counterQuestions.currentQuestion);
-  console.log(currentQuestions);
-  console.log(currentQuestion);
+  console.log(currentPage);
 
   return (
     <div className={styles.page}>
       <Header />
-      <CurrentPageContext.Provider value={currentPage}>
-        <CurrentQuestionContext.Provider value={currentQuestion}>
-          <CounterQuestionsContext.Provider value={counterQuestions}>
-            <Main
-              handleStartTest={handleStartTest}
-              handleIncrementBtn={handleIncrementBtn}
-              handleDecrementBtn={handleDecrementBtn}
-              onChangeCounter={onChangeCounter}
-              setCurrentPage={setCurrentPage}
-              disableBtn={disableBtn}
-              onChangeAnswer={handleChangeAnswer}
-              handleSwitchQuestion={handleSwitchQuestion}
-              handleStartOver={handleStartOver}
-            />
+      <QuestionsContext.Provider value={data}>
+        <CurrentPageContext.Provider value={valueCurrentPageContext}>
+          <CounterQuestionsContext.Provider
+            value={valueCounterQuestionsContext}
+          >
+            <CurrentQuestionContext.Provider
+              value={valueCurrentQuestionContext}
+            >
+              <Main disableBtn={disableBtn} setDisableBtn={setDisableBtn} />
+            </CurrentQuestionContext.Provider>
           </CounterQuestionsContext.Provider>
-        </CurrentQuestionContext.Provider>
-      </CurrentPageContext.Provider>
+        </CurrentPageContext.Provider>
+      </QuestionsContext.Provider>
       <Footer />
     </div>
   );

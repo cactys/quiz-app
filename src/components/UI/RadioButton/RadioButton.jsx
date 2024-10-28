@@ -9,7 +9,7 @@ const RadioButton = ({ answer, index, onChangeAnswer }) => {
     <label className={styles.radio}>
       <input
         className={styles.radio__input}
-        id="answer"
+        id={index}
         type="radio"
         name="answer"
         onChange={handleChangeAnswer}

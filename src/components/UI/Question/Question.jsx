@@ -3,7 +3,8 @@ import styles from './Question.module.css';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 
 const Question = () => {
-  const { question } = useContext(CurrentQuestionContext);
+  const { currentQuestion } = useContext(CurrentQuestionContext);
+  const { question } = currentQuestion;
 
   return (
     <>

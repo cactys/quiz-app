@@ -5,7 +5,8 @@ import styles from './Answer.module.css';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 
 const Answer = ({ onChangeAnswer }) => {
-  const { answers } = useContext(CurrentQuestionContext);
+  const { currentQuestion } = useContext(CurrentQuestionContext);
+  const { answers } = currentQuestion;
 
   return (
     <fieldset className={styles.fieldset}>

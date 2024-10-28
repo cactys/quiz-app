@@ -14,8 +14,8 @@ import styles from './Card.module.css';
  * @returns {JSX.Element} JSX.Element
  */
 
-const Card = ({ image, title, subtitle, closeBtn, answers, question }) => {
-  const currentPage = useContext(CurrentPageContext);
+const Card = ({ image, title, subtitle, closeBtn, answers, question, children }) => {
+  const { currentPage } = useContext(CurrentPageContext);
   const { incorrect, error } = useContext(CounterQuestionsContext);
 
   return (
@@ -59,25 +59,7 @@ const Card = ({ image, title, subtitle, closeBtn, answers, question }) => {
         </>
       )}
       <div className={styles.card__body}>
-        {answers}
-        {currentPage === 'result' && incorrect === 0 && error > 0 && (
-          <p className={styles.card__copy}>
-            Ты не ответил ни на один вопрос. Попробуй еще!
-          </p>
-        )}
-        {currentPage === 'result' && error === 0 && (
-          <p className={styles.card__copy}>
-            Ты ответил правильно на&nbsp;все&nbsp;вопросы. Так держать!
-          </p>
-        )}
-        {currentPage === 'result' && incorrect > 0 && error > 0 && (
-          <p className={styles.card__copy}>
-            Ты ответил правильно на&nbsp;
-            <span className={styles.card__copy_incorrect}>{incorrect}</span>
-            &nbsp;вопросов и сделал{' '}
-            <span className={styles.card__copy_error}>{error}</span> ошибок.
-          </p>
-        )}
+        {children}
       </div>
     </article>
   );

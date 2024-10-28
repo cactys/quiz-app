@@ -1,0 +1,14 @@
+.result {
+  margin: 16px 0 0;
+  text-align: center;
+}
+
+.result_incorrect {
+  color: var(--color-green);
+  font-weight: var(--font-w-bold);
+}
+
+.result_error {
+  color: var(--color-red);
+  font-weight: var(--font-w-bold);
+}

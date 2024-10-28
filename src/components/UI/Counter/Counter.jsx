@@ -18,9 +18,7 @@ const Counter = ({
   handleIncrementBtn,
   onChangeCounter,
 }) => {
-  const { question, minQuestion, maxQuestion } = useContext(
-    CounterQuestionsContext
-  );
+  const { counterQuestions } = useContext(CounterQuestionsContext);
 
   return (
     <div className={styles.container}>
@@ -32,7 +30,7 @@ const Counter = ({
           className={`${styles.counter__btn} ${styles.container__btn_decrement}`}
           type="button"
           onClick={handleDecrementBtn}
-          disabled={question <= minQuestion}
+          disabled={counterQuestions.question <= counterQuestions.minQuestion}
         >
           Минус
         </button>
@@ -40,9 +38,9 @@ const Counter = ({
           type="number"
           id="count"
           name="count"
-          value={question || ''}
-          min={minQuestion}
-          max={maxQuestion}
+          value={counterQuestions.question || ''}
+          min={counterQuestions.minQuestion}
+          max={counterQuestions.maxQuestion}
           onChange={onChangeCounter}
           className={styles.counter__input}
         />
@@ -50,7 +48,7 @@ const Counter = ({
           className={`${styles.counter__btn} ${styles.container__btn_increment}`}
           type="button"
           onClick={handleIncrementBtn}
-          disabled={question >= maxQuestion}
+          disabled={counterQuestions.question >= counterQuestions.maxQuestion}
         >
           Плюс
         </button>

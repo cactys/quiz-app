@@ -1,12 +1,12 @@
 export const getRandomQuestion = (question, answers) => {
   const answerList = new Array();
 
-  answerList.push(question.correctAnswer + ' ' + 'true');
+  answerList.push(question.correctAnswer);
   while (answerList.length < 4) {
-    answerList.forEach((i) => {
-      answerList.indexOf(i) === answerList.lastIndexOf(i)
+    answerList.forEach((item, index) => {
+      answerList.indexOf(item) === answerList.lastIndexOf(item)
         ? answerList.push(answers[Math.floor(Math.random() * answers.length)])
-        : answerList.push(i);
+        : answerList.push(answers[index]);
     });
   }
 
