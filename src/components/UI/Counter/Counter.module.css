@@ -58,7 +58,8 @@
   background-color: transparent;
 }
 
-.counter__input:focus {
+.counter__input:focus,
+.counter__input:hover {
   border: 4px solid var(--btn-color-active);
   color: var(--btn-color-active);
 }
