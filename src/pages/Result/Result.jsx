@@ -1,15 +1,19 @@
+import { useContext } from 'react';
+import Button from '@UI/Button/Button';
+import Card from '@UI/Card/Card';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { QuestionsContext } from '@/contexts/QuestionsContext';
 import { getRandomQuestion } from '@/utils/utils';
-import Button from '@UI/Button/Button';
-import Card from '@UI/Card/Card';
+import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
 import imageResult from '@assets/images/image__result.svg';
 import styles from './Result.module.css';
-import { useContext } from 'react';
-import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
+
+/**
+ * @returns {JSX.Element} JSX.Element - Result component
+ */
 
 const Result = () => {
   const data = useContext(QuestionsContext);

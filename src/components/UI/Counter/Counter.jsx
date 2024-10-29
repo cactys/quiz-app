@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
-import styles from './Counter.module.css';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
+
+import styles from './Counter.module.css';
 
 /**
  *
- * @param {string} subtitle описание счетчика
- * @param {()=> void} handleDecrementBtn onClick ручка кнопки "минус"
- * @param {() => void} handleIncrementBtn onClick ручка кнопки "плюс"
- * @param {() => void} onChangeCounter onChange поля input
- * @returns {JSX.Element} JSX.Element
+ * @param {string} subtitle title counter questions
+ * @param {()=> void} handleDecrementBtn function onClick minus button
+ * @param {() => void} handleIncrementBtn function onClick plus button
+ * @param {() => void} onChangeCounter function onChange input
+ * @returns {JSX.Element} JSX.Element with Counter component
  */
 
 const Counter = ({

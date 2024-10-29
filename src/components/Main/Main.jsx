@@ -3,9 +3,9 @@ import Welcome from '@pages/Welcome/Welcome';
 import Test from '@/pages/Test/Test';
 import Result from '@pages/Result/Result';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
+import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 import styles from './Main.module.css';
-import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 /**
  * @returns {JSX.Element} JSX.Element - Main component

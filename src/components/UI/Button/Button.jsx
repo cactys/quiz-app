@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
-import styles from './Button.module.css';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
+import styles from './Button.module.css';
+
 /**
- * @param {string} title текст кнопки
- * @param {string} htmlType тип кнопки
- * @param {boolean} answerCount boolean
- * @param {() => void} handleButton void function
- * @returns {JSX.Element} JSX.Element
+ * @param {string} title button title text
+ * @param {string} htmlType button type html attribute
+ * @param {boolean} answerCount button answer count status boolean
+ * @param {() => void} handleButton button handle function callback
+ * @returns {JSX.Element} JSX.Element - button component
  */
 
 const Button = ({ title, htmlType, answerCount, handleButton }) => {
   const { counterQuestions } = useContext(CounterQuestionsContext);
-
   const { disableBtn, setDisableBtn } = useContext(ButtonStatusContext);
 
   useEffect(() => {

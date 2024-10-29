@@ -7,12 +7,11 @@ import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { QuestionsContext } from '@/contexts/QuestionsContext';
-import { getRandomInt, getRandomQuestion } from '@/utils/utils';
 import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
+import { getRandomInt, getRandomQuestion } from '@/utils/utils';
 
 /**
- *
- * @returns {JSX.Element} JSX.Element
+ * @returns {JSX.Element} JSX.Element - Test component
  */
 
 const Test = () => {

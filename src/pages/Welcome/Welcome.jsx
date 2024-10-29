@@ -6,14 +6,13 @@ import { QuestionsContext } from '@/contexts/QuestionsContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
+import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 import { getRandomQuestion } from '@/utils/utils';
 
 import imageQuestion from '@assets/images/image__question.svg';
-import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
 /**
- *
- * @returns {JSX.Element} JSX.Element
+ * @returns {JSX.Element} JSX.Element - Welcome component
  */
 
 const Welcome = () => {

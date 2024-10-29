@@ -1,18 +1,17 @@
 import { useContext } from 'react';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 import styles from './Card.module.css';
 
 /**
  *
- * @param {object} image {src: string, width: number, height: number, position: string, top: number, right: number, placement: string}
- * @param {string} title string
- * @param {string} subtitle string
- * @param {() => void} closeBtn void function
- * @param {JSX.Element} question JSX.Element
- * @param {JSX.Element} children JSX.Element
- * @returns {JSX.Element} JSX.Element
+ * @param {object} image object - image props for card component
+ * @param {string} title title string for card component
+ * @param {string} subtitle subtitle string for card component
+ * @param {() => void} closeBtn closeBtn function callback for card component
+ * @param {JSX.Element} question JSX.Element for card component
+ * @param {JSX.Element} children JSX.Element for card component
+ * @returns {JSX.Element} JSX.Element - card component
  */
 
 const Card = ({ image, title, subtitle, closeBtn, question, children }) => {

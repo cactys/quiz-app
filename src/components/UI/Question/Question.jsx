@@ -2,6 +2,10 @@ import { useContext } from 'react';
 import styles from './Question.module.css';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 
+/**
+ * @returns {JSX.Element} JSX.Element - Question component
+ */
+
 const Question = () => {
   const { currentQuestion } = useContext(CurrentQuestionContext);
   const { question } = currentQuestion;

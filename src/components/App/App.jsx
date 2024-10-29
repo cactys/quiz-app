@@ -12,7 +12,7 @@ import { getRandomQuestion } from '@/utils/utils';
 import styles from './App.module.css';
 
 /**
- * @returns {JSX.Element} JSX.Element App.jsx
+ * @returns {JSX.Element} JSX.Element - App component
  */
 
 const App = () => {
