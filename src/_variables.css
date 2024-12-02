@@ -29,4 +29,6 @@
   --btn-color-active: #ff9c46;
   --btn-color-disable: #edd0b6;
   --text-btn-disable: #81a1a9;
+
+  --transition: all .3s ease-in-out;
 }

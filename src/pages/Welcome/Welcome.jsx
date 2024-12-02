@@ -62,7 +62,14 @@ const Welcome = () => {
   };
 
   const onChangeCounter = (e) => {
-    setCounterQuestions({ ...counterQuestions, question: e.target.value });
+    const value = e.target.value;
+    console.log(value);
+
+    console.log(value === 0);
+
+    if (value <= 0)
+      return setCounterQuestions({ ...counterQuestions, question: 1 });
+    setCounterQuestions({ ...counterQuestions, question: value });
   };
 
   useEffect(() => {

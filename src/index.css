@@ -1,6 +1,6 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/font.css);
-@import url(./variables.css);
+@import url(./_variables.css);
 
 body {
   color: var(--color-base);

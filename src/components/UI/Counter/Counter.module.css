@@ -24,10 +24,15 @@
   border-radius: 50%;
   font-size: 0;
   background-color: var(--color-base);
+  cursor: pointer;
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: cover;
-  cursor: pointer;
+  transition: var(--transition);
+}
+
+.counter__btn:hover {
+  background-color: var(--btn-color-active);
 }
 
 .counter__btn:disabled {
@@ -56,6 +61,7 @@
   line-height: var(--line-height-lg);
   text-align: center;
   background-color: transparent;
+  transition: var(--transition);
 }
 
 .counter__input:focus,
