@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
+import useForm from '@/hooks/useForm';
 
 import styles from './Counter.module.css';
 
@@ -8,17 +9,42 @@ import styles from './Counter.module.css';
  * @param {string} subtitle title counter questions
  * @param {()=> void} handleDecrementBtn function onClick minus button
  * @param {() => void} handleIncrementBtn function onClick plus button
- * @param {() => void} onChangeCounter function onChange input
  * @returns {JSX.Element} JSX.Element with Counter component
  */
 
-const Counter = ({
-  subtitle,
-  handleDecrementBtn,
-  handleIncrementBtn,
-  onChangeCounter,
-}) => {
-  const { counterQuestions } = useContext(CounterQuestionsContext);
+const Counter = ({ subtitle, handleDecrementBtn, handleIncrementBtn }) => {
+  const { counterQuestions, setCounterQuestions } = useContext(
+    CounterQuestionsContext
+  );
+  const { values, handleChange } = useForm({
+    count: counterQuestions.question,
+  });
+
+  const onBlur = () => {
+    if (!values.count)
+      setCounterQuestions({
+        ...counterQuestions,
+        question: 0,
+      });
+  };
+
+  const onFocus = () => {
+    if (values.count <= 0)
+      setCounterQuestions({ ...counterQuestions, question: '' });
+  };
+
+  useEffect(() => {
+    if (values.count > counterQuestions.maxQuestion)
+      setCounterQuestions({
+        ...counterQuestions,
+        question: counterQuestions.maxQuestion,
+      });
+
+    setCounterQuestions({
+      ...counterQuestions,
+      question: values ? values.count : 0,
+    });
+  }, [setCounterQuestions, values]);
 
   return (
     <div className={styles.container}>
@@ -38,11 +64,14 @@ const Counter = ({
           type="number"
           id="count"
           name="count"
-          value={counterQuestions.question || ''}
+          value={counterQuestions.question}
           min={counterQuestions.minQuestion}
           max={counterQuestions.maxQuestion}
-          onChange={onChangeCounter}
+          onChange={handleChange}
           className={styles.counter__input}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          pattern="[0-9]{1,9}"
         />
         <button
           className={`${styles.counter__btn} ${styles.container__btn_increment}`}

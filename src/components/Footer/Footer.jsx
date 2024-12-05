@@ -12,6 +12,7 @@ const Footer = () => {
         Проект выполнен в рамках стажировки{' '}
         <a
           href="https://preax.ru"
+          rel="noopener noreferrer"
           target="_blank"
           className={styles.footer__link}
         >

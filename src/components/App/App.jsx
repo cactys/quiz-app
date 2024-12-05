@@ -19,7 +19,7 @@ const App = () => {
   const data = useContext(QuestionsContext);
   const [currentPage, setCurrentPage] = useState('start');
   const [counterQuestions, setCounterQuestions] = useState({
-    question: 1,
+    question: 0,
     questionNumber: 1,
     incorrect: 0,
     error: 0,
