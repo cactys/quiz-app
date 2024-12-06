@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
-import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 
 import styles from './Button.module.css';
 
@@ -13,8 +12,9 @@ import styles from './Button.module.css';
  */
 
 const Button = ({ title, htmlType, answerCount, handleButton }) => {
-  const { counterQuestions } = useContext(CounterQuestionsContext);
-  const { disableBtn, setDisableBtn } = useContext(ButtonStatusContext);
+  const { questions, questionNumber, disableBtn, setDisableBtn } = useContext(
+    CounterQuestionsContext
+  );
 
   useEffect(() => {
     setDisableBtn(disableBtn);
@@ -54,7 +54,7 @@ const Button = ({ title, htmlType, answerCount, handleButton }) => {
       </div>
       {answerCount && (
         <p className={styles['button__answer-count']}>
-          {counterQuestions.questionNumber} / {counterQuestions.question}
+          {questionNumber} / {questions}
         </p>
       )}
     </div>

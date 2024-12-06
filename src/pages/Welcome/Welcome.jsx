@@ -6,102 +6,83 @@ import { QuestionsContext } from '@/contexts/QuestionsContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
-import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 import { getRandomQuestion } from '@/utils/utils';
 
-import imageQuestion from '@assets/images/image__question.svg';
+import styles from './Welcome.module.css';
 
 /**
  * @returns {JSX.Element} JSX.Element - Welcome component
  */
-
 const Welcome = () => {
-  const data = useContext(QuestionsContext);
-  const { counterQuestions, setCounterQuestions } = useContext(
-    CounterQuestionsContext
-  );
-  const { setCurrentPage } = useContext(CurrentPageContext);
-  const { currentQuestion, setCurrentQuestion, allQuestion, setAllQuestion } =
+  const { questionsData } = useContext(QuestionsContext);
+  const {
+    questions,
+    setQuestions,
+    questionNumber,
+    maxQuestions,
+    setMaxQuestions,
+    minQuestions,
+    disableBtn,
+    setDisableBtn,
+  } = useContext(CounterQuestionsContext);
+  const { setCurrentPage, currentPage } = useContext(CurrentPageContext);
+  const { allQuestion, setAllQuestion, currentQuestion, setCurrentQuestion } =
     useContext(CurrentQuestionContext);
-  const { disableBtn, setDisableBtn } = useContext(ButtonStatusContext);
-
   const handleStartTest = () => {
-    setCurrentPage(`question#${counterQuestions.questionNumber}`);
+    setCurrentPage(`question#${questionNumber}`);
   };
 
+  // TODO: разработать хук по добавлению и уменьшению количества вопросов.
   const handleIncrementBtn = () => {
     setAllQuestion([
       ...allQuestion,
       getRandomQuestion(
-        data.questions[Math.floor(Math.random() * data.questions.length)],
-        data.countries
+        questionsData.questions[
+          Math.floor(Math.random() * questionsData.questions.length)
+        ],
+        questionsData.countries
       ),
     ]);
-    counterQuestions.question < counterQuestions.maxQuestion
-      ? setCounterQuestions({
-          ...counterQuestions,
-          question: ++counterQuestions.question,
-        })
-      : setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.question,
-        });
+    questions < maxQuestions
+      ? setQuestions(+questions + 1)
+      : setQuestions(+questions);
   };
 
   const handleDecrementBtn = () => {
     allQuestion.pop();
-    counterQuestions.question > counterQuestions.minQuestion
-      ? setCounterQuestions({
-          ...counterQuestions,
-          question: --counterQuestions.question,
-        })
-      : setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.minQuestion,
-        });
+    questions > minQuestions
+      ? setQuestions(+questions - 1)
+      : setQuestions(+minQuestions);
   };
 
   useEffect(() => {
-    counterQuestions.question >= counterQuestions.maxQuestion
-      ? setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.maxQuestion,
-        })
-      : setCounterQuestions({
-          ...counterQuestions,
-          question: counterQuestions.question,
-        });
-  }, [counterQuestions.question, setCounterQuestions]);
+    questions >= maxQuestions
+      ? setQuestions(maxQuestions)
+      : setQuestions(questions);
+  }, [questions]);
 
   useEffect(() => {
-    setCurrentQuestion(allQuestion[counterQuestions.questionNumber - 1]);
-  }, [counterQuestions.questionNumber, currentQuestion]);
-
-  useEffect(() => {
-    if (counterQuestions.question <= 0 || !counterQuestions.question) {
+    if (questions <= 0 || !questions) {
       setDisableBtn(true);
     } else {
       setDisableBtn(false);
     }
-  }, [disableBtn, counterQuestions.question]);
+  }, [disableBtn, questions]);
+
+  useEffect(() => {
+    setMaxQuestions(questionsData.questions.length);
+  }, [maxQuestions, questionsData]);
 
   return (
     <>
       <Card
+        image={<div className={styles.image} />}
         title="Добро пожаловать"
         subtitle="на викторину по странам и столицам!"
-        image={{
-          src: imageQuestion,
-          width: 135,
-          height: 146,
-          position: 'absolute',
-          right: 0,
-          top: -79,
-        }}
       />
       <Counter
         subtitle="Выбери количество вопросов:"
-        count={counterQuestions.question}
+        count={questions}
         handleIncrementBtn={handleIncrementBtn}
         handleDecrementBtn={handleDecrementBtn}
       />

@@ -1,0 +1,12 @@
+.image {
+  position: absolute;
+  top: -79px;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  width: 135px;
+  height: 146px;
+  background-image: url(../../assets/images/image__question.svg);
+  background-position: center;
+  background-size: cover;
+}

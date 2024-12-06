@@ -7,7 +7,6 @@ import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { QuestionsContext } from '@/contexts/QuestionsContext';
-import { ButtonStatusContext } from '@/contexts/ButtonStatusContext';
 import { getRandomInt, getRandomQuestion } from '@/utils/utils';
 
 /**
@@ -15,22 +14,26 @@ import { getRandomInt, getRandomQuestion } from '@/utils/utils';
  */
 
 const Test = () => {
-  const data = useContext(QuestionsContext);
+  const { questionsData } = useContext(QuestionsContext);
   const { setCurrentPage } = useContext(CurrentPageContext);
-  const { counterQuestions, setCounterQuestions } = useContext(
-    CounterQuestionsContext
-  );
-  const { setAllQuestion } = useContext(CurrentQuestionContext);
-  const { setDisableBtn } = useContext(ButtonStatusContext);
+  const {
+    setQuestions,
+    questionNumber,
+    setQuestionNumber,
+    setIncorrectQuestions,
+    setErrorQuestions,
+    setMinQuestions,
+    setMaxQuestions,
+    setDisableBtn,
+  } = useContext(CounterQuestionsContext);
+  const { setAllQuestion, allQuestion, setCurrentQuestion, currentQuestion } =
+    useContext(CurrentQuestionContext);
   const [currentAnswer, setCurrentAnswer] = useState('');
 
   const handleSwitchQuestion = () => {
     setCurrentPage('result');
-    setCounterQuestions({
-      ...counterQuestions,
-      incorrect: getRandomInt(0, 4),
-      error: getRandomInt(0, 4),
-    });
+    setIncorrectQuestions(getRandomInt(0, 4));
+    setErrorQuestions(getRandomInt(0, 4));
   };
 
   const handleChangeAnswer = (answer) => {
@@ -42,18 +45,19 @@ const Test = () => {
 
   const handleStartOver = () => {
     setCurrentPage('start');
-    setCounterQuestions({
-      question: 1,
-      questionNumber: 1,
-      incorrect: 0,
-      error: 0,
-      minQuestion: 1,
-      maxQuestion: data.questions.length,
-    });
+    setQuestions(0);
+    setQuestionNumber(1);
+    setIncorrectQuestions(0);
+    setErrorQuestions(0);
+    setMinQuestions(1);
+    setMaxQuestions(questionsData.questions.length);
+
     setAllQuestion([
       getRandomQuestion(
-        data.questions[Math.floor(Math.random() * data.questions.length)],
-        data.countries
+        questionsData.questions[
+          Math.floor(Math.random() * questionsData.questions.length)
+        ],
+        questionsData.countries
       ),
     ]);
   };
@@ -61,6 +65,10 @@ const Test = () => {
   useEffect(() => {
     setDisableBtn(!currentAnswer);
   }, [currentAnswer]);
+
+  useEffect(() => {
+    setCurrentQuestion(allQuestion[questionNumber - 1]);
+  }, [questionNumber, currentQuestion]);
 
   return (
     <>

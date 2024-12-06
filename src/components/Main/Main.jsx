@@ -13,11 +13,11 @@ import styles from './Main.module.css';
 
 const Main = () => {
   const { currentPage } = useContext(CurrentPageContext);
-  const { counterQuestions } = useContext(CounterQuestionsContext);
+  const { questionNumber } = useContext(CounterQuestionsContext);
 
   const pages = {
     start: <Welcome />,
-    [`question#${counterQuestions.questionNumber}`]: <Test />,
+    [`question#${questionNumber}`]: <Test />,
     result: <Result />,
   };
 

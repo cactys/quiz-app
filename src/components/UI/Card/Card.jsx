@@ -26,27 +26,7 @@ const Card = ({ image, title, subtitle, closeBtn, question, children }) => {
         question
       ) : (
         <>
-          <figure
-            className={`${
-              image ? styles.card__figure : styles.card__figure_disable
-            }`}
-            style={{
-              justifyContent: image.placement,
-            }}
-          >
-            <img
-              src={image.src}
-              alt={title}
-              className={styles.card__image}
-              width={image.width}
-              height={image.height}
-              style={{
-                position: image.position,
-                top: image.top,
-                right: image.right,
-              }}
-            />
-          </figure>
+          {image ? image : ''}
           <header
             className={`${styles.card__header} ${
               currentPage === 'result' ? styles.card__header_place_result : ''

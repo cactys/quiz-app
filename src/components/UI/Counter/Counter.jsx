@@ -13,38 +13,30 @@ import styles from './Counter.module.css';
  */
 
 const Counter = ({ subtitle, handleDecrementBtn, handleIncrementBtn }) => {
-  const { counterQuestions, setCounterQuestions } = useContext(
+  const { questions, setQuestions, minQuestions, maxQuestions } = useContext(
     CounterQuestionsContext
   );
   const { values, handleChange } = useForm({
-    count: counterQuestions.question,
+    count: questions,
   });
 
   const onBlur = () => {
-    if (!values.count)
-      setCounterQuestions({
-        ...counterQuestions,
-        question: 0,
-      });
+    if (!values.count && !questions) {
+      setQuestions(0);
+    }
   };
 
   const onFocus = () => {
-    if (values.count <= 0)
-      setCounterQuestions({ ...counterQuestions, question: '' });
+    if (values.count <= 0 && questions <= 0) setQuestions('');
   };
 
   useEffect(() => {
-    if (values.count > counterQuestions.maxQuestion)
-      setCounterQuestions({
-        ...counterQuestions,
-        question: counterQuestions.maxQuestion,
-      });
+    setQuestions(values.count);
+  }, [values]);
 
-    setCounterQuestions({
-      ...counterQuestions,
-      question: values ? values.count : 0,
-    });
-  }, [setCounterQuestions, values]);
+  useEffect(() => {
+    if (values.count > maxQuestions) setQuestions(maxQuestions);
+  }, [values]);
 
   return (
     <div className={styles.container}>
@@ -56,28 +48,28 @@ const Counter = ({ subtitle, handleDecrementBtn, handleIncrementBtn }) => {
           className={`${styles.counter__btn} ${styles.container__btn_decrement}`}
           type="button"
           onClick={handleDecrementBtn}
-          disabled={counterQuestions.question <= counterQuestions.minQuestion}
+          disabled={questions <= minQuestions}
         >
           Минус
         </button>
         <input
-          type="number"
+          type="text"
           id="count"
           name="count"
-          value={counterQuestions.question}
-          min={counterQuestions.minQuestion}
-          max={counterQuestions.maxQuestion}
+          value={questions}
+          min={minQuestions}
+          max={maxQuestions}
           onChange={handleChange}
           className={styles.counter__input}
           onBlur={onBlur}
           onFocus={onFocus}
-          pattern="[0-9]{1,9}"
+          // pattern="[0-9]{1,9}"
         />
         <button
           className={`${styles.counter__btn} ${styles.container__btn_increment}`}
           type="button"
           onClick={handleIncrementBtn}
-          disabled={counterQuestions.question >= counterQuestions.maxQuestion}
+          disabled={questions >= maxQuestions}
         >
           Плюс
         </button>

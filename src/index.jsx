@@ -1,15 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '@components/App/App';
-import { QuestionsContext } from './contexts/QuestionsContext';
-import data from '../data/quizz_questions.json';
+import { QuestionsContextProvider } from './contexts/QuestionsContext';
 
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QuestionsContext.Provider value={data}>
+    <QuestionsContextProvider>
       <App />
-    </QuestionsContext.Provider>
+    </QuestionsContextProvider>
   </StrictMode>
 );

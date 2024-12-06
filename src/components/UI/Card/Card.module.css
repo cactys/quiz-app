@@ -19,14 +19,6 @@
   mask-size: cover;
 }
 
-.card__figure {
-  display: flex;
-}
-
-.card__figure_disable {
-  display: none;
-}
-
 .card__header {
   display: flex;
   flex-direction: column;

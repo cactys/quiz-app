@@ -35,3 +35,19 @@ export const getRandomInt = (min, max) => {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 };
+
+/**
+ *
+ * @param {number} number number of incorrect or error answers
+ * @param {boolean} incorrect true or false
+ * @returns {string} string of declension
+ */
+export const getDeclension = (number, incorrect) => {
+  const lastNumber = number % 10;
+  if (number > 10 && [11, 12, 13, 14].includes(number % 100))
+    return incorrect ? 'вопросов' : 'ошибок';
+  if (lastNumber === 1) return incorrect ? 'вопрос' : 'ошибку';
+  if ([2, 3, 4].includes(lastNumber)) return incorrect ? 'вопроса' : 'ошибки';
+  if ([5, 6, 7, 8, 9, 0].includes(lastNumber))
+    return incorrect ? 'вопросов' : 'ошибок';
+};

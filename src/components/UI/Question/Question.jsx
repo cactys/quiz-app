@@ -1,12 +1,14 @@
 import { useContext } from 'react';
 import styles from './Question.module.css';
 import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
+import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 /**
  * @returns {JSX.Element} JSX.Element - Question component
  */
 
 const Question = () => {
+  const { questionNumber } = useContext(CounterQuestionsContext);
   const { currentQuestion } = useContext(CurrentQuestionContext);
   const { question } = currentQuestion;
 
