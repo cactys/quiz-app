@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
+import { useContext, useEffect } from 'react';
+import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
 
 import styles from './Button.module.css';
 

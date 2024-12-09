@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { CurrentPageContext } from '@/contexts/CurrentPageContext';
+import { CurrentPageContext } from '@contexts/CurrentPageContext';
 
 import styles from './Card.module.css';
 
 /**
  *
- * @param {object} image object - image props for card component
+ * @param {object} imageClassName object - image props for card component
  * @param {string} title title string for card component
  * @param {string} subtitle subtitle string for card component
  * @param {() => void} closeBtn closeBtn function callback for card component
@@ -14,7 +14,14 @@ import styles from './Card.module.css';
  * @returns {JSX.Element} JSX.Element - card component
  */
 
-const Card = ({ image, title, subtitle, closeBtn, question, children }) => {
+const Card = ({
+  imageClassName,
+  title,
+  subtitle,
+  closeBtn,
+  question,
+  children,
+}) => {
   const { currentPage } = useContext(CurrentPageContext);
 
   return (
@@ -26,7 +33,7 @@ const Card = ({ image, title, subtitle, closeBtn, question, children }) => {
         question
       ) : (
         <>
-          {image ? image : ''}
+          {imageClassName ? <div className={imageClassName} /> : ''}
           <header
             className={`${styles.card__header} ${
               currentPage === 'result' ? styles.card__header_place_result : ''

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import RadioButton from '../RadioButton/RadioButton';
-import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
+import { CurrentQuestionContext } from '@contexts/CurrentQuestionContext';
+import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
 
 import styles from './Answer.module.css';
-import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 
 /**
  *

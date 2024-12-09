@@ -1,13 +1,12 @@
 import { useContext } from 'react';
+import { getDeclension, getRandomQuestion } from '@/utils/utils';
 import Button from '@UI/Button/Button';
 import Card from '@UI/Card/Card';
-import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
-import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
-import { QuestionsContext } from '@/contexts/QuestionsContext';
-import { getDeclension, getRandomQuestion } from '@/utils/utils';
+import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
+import { CurrentPageContext } from '@contexts/CurrentPageContext';
+import { CurrentQuestionContext } from '@contexts/CurrentQuestionContext';
+import { QuestionsContext } from '@contexts/QuestionsContext';
 
-import imageResult from '@assets/images/image__result.svg';
 import styles from './Result.module.css';
 
 /**
@@ -51,7 +50,7 @@ const Result = () => {
 
   return (
     <>
-      <Card title="Результат" image={<div className={styles.image} />}>
+      <Card title="Результат" imageClassName={styles.image}>
         {incorrectQuestions === 0 && errorQuestions > 0 && (
           <p className={styles.result}>
             Ты не ответил ни на один вопрос. Попробуй еще!

@@ -1,11 +1,11 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
-import { CounterQuestionsContextProvider } from '@/contexts/CounterQuestionsContext';
-import { QuestionsContext } from '@/contexts/QuestionsContext';
-import { CurrentPageContextProvider } from '@/contexts/CurrentPageContext';
-import { CurrentQuestionContextProvider } from '@/contexts/CurrentQuestionContext';
+import { QuestionsContext } from '@contexts/QuestionsContext';
+import { CounterQuestionsContextProvider } from '@contexts/CounterQuestionsContext';
+import { CurrentQuestionContextProvider } from '@contexts/CurrentQuestionContext';
+import { CurrentPageContextProvider } from '@contexts/CurrentPageContext';
 
 import styles from './App.module.css';
 

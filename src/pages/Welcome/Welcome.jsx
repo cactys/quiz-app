@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import Counter from '@UI/Counter/Counter';
 import Button from '@UI/Button/Button';
 import Card from '@UI/Card/Card';
-import { QuestionsContext } from '@/contexts/QuestionsContext';
-import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
-import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
+import { QuestionsContext } from '@contexts/QuestionsContext';
+import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
+import { CurrentPageContext } from '@contexts/CurrentPageContext';
+import { CurrentQuestionContext } from '@contexts/CurrentQuestionContext';
 import { getRandomQuestion } from '@/utils/utils';
 
 import styles from './Welcome.module.css';
@@ -25,14 +25,12 @@ const Welcome = () => {
     disableBtn,
     setDisableBtn,
   } = useContext(CounterQuestionsContext);
-  const { setCurrentPage, currentPage } = useContext(CurrentPageContext);
-  const { allQuestion, setAllQuestion, currentQuestion, setCurrentQuestion } =
-    useContext(CurrentQuestionContext);
+  const { setCurrentPage } = useContext(CurrentPageContext);
+  const { allQuestion, setAllQuestion } = useContext(CurrentQuestionContext);
   const handleStartTest = () => {
     setCurrentPage(`question#${questionNumber}`);
   };
 
-  // TODO: разработать хук по добавлению и уменьшению количества вопросов.
   const handleIncrementBtn = () => {
     setAllQuestion([
       ...allQuestion,
@@ -76,7 +74,7 @@ const Welcome = () => {
   return (
     <>
       <Card
-        image={<div className={styles.image} />}
+        imageClassName={styles.image}
         title="Добро пожаловать"
         subtitle="на викторину по странам и столицам!"
       />

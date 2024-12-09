@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
-import useForm from '@/hooks/useForm';
+import { useContext, useEffect } from 'react';
+import useForm from '@hooks/useForm';
+import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
 
 import styles from './Counter.module.css';
 
@@ -63,7 +63,6 @@ const Counter = ({ subtitle, handleDecrementBtn, handleIncrementBtn }) => {
           className={styles.counter__input}
           onBlur={onBlur}
           onFocus={onFocus}
-          // pattern="[0-9]{1,9}"
         />
         <button
           className={`${styles.counter__btn} ${styles.container__btn_increment}`}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 /**
  *
  * @param {ChangeEvent<HTMLInputElement>} inputValue event onChange of input
- * @returns {object} object with values and handleChange
+ * @returns {object} object with values, setValue and handleChange
  */
 const useForm = (inputValue) => {
   const [values, setValues] = useState(inputValue);
