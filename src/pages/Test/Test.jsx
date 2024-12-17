@@ -7,7 +7,7 @@ import { CurrentQuestionContext } from '@/contexts/CurrentQuestionContext';
 import { CounterQuestionsContext } from '@/contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { QuestionsContext } from '@/contexts/QuestionsContext';
-import { getRandomInt, getRandomQuestion } from '@/utils/utils';
+import { getRandomInt } from '@/utils/utils';
 
 /**
  * @returns {JSX.Element} JSX.Element - Test component
@@ -52,14 +52,7 @@ const Test = () => {
     setMinQuestions(1);
     setMaxQuestions(questionsData.questions.length);
 
-    setAllQuestion([
-      getRandomQuestion(
-        questionsData.questions[
-          Math.floor(Math.random() * questionsData.questions.length)
-        ],
-        questionsData.countries
-      ),
-    ]);
+    setAllQuestion([]);
   };
 
   useEffect(() => {

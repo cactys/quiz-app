@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import RadioButton from '../RadioButton/RadioButton';
 import { CurrentQuestionContext } from '@contexts/CurrentQuestionContext';
-import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
 
 import styles from './Answer.module.css';
 
@@ -12,7 +11,6 @@ import styles from './Answer.module.css';
  */
 
 const Answer = ({ onChangeAnswer }) => {
-  const { questionNumber } = useContext(CounterQuestionsContext);
   const { currentQuestion } = useContext(CurrentQuestionContext);
   const { answers } = currentQuestion;
 

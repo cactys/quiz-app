@@ -1,26 +1,40 @@
 /**
  *
- * @param {object} question {question: string, correctAnswer: string, flag:string}
- * @param {Array} answers [string]
+ * @param {Array} arr [ questions: {question: string, correctAnswer: string, flag: string}, countries: {string}]
+ * @param {number} number number
  * @returns
  */
+export const getQuestionFromNumber = (arr, number) => {
+  const { questions, countries } = arr;
 
-export const getRandomQuestion = (question, answers) => {
-  const answerList = new Array();
+  if (!Array.isArray(questions) || !Array.isArray(countries) || number <= 0) {
+    return [];
+  }
 
-  answerList.push(question.correctAnswer);
-  while (answerList.length < 4) {
-    answerList.forEach((item, index) => {
-      answerList.indexOf(item) === answerList.lastIndexOf(item)
-        ? answerList.push(answers[Math.floor(Math.random() * answers.length)])
-        : answerList.push(answers[index]);
+  const result = new Array();
+
+  const shuffledQuestions = [...questions].sort(() => 0.5 - Math.random());
+
+  for (let i = 0; i < number && i < shuffledQuestions.length; i++) {
+    const question = shuffledQuestions[i];
+    const correctAnswer = question.correctAnswer;
+
+    const answers = new Set();
+    answers.add(correctAnswer);
+
+    while (answers.size < 4) {
+      const randomCountry =
+        countries[Math.floor(Math.random() * countries.length)];
+      answers.add(randomCountry);
+    }
+
+    result.push({
+      question: question,
+      answers: [...answers].sort(() => 0.5 - Math.random()),
     });
   }
 
-  return {
-    question: question,
-    answers: answerList.sort(() => 0.5 - Math.random()),
-  };
+  return result;
 };
 
 /**

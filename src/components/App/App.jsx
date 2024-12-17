@@ -14,14 +14,12 @@ import styles from './App.module.css';
  */
 
 const App = () => {
-  const { questionsData } = useContext(QuestionsContext);
-
   return (
     <div className={styles.page}>
       <Header />
       <CounterQuestionsContextProvider>
         <CurrentQuestionContextProvider>
-          <CurrentPageContextProvider data={questionsData}>
+          <CurrentPageContextProvider>
             <Main />
           </CurrentPageContextProvider>
         </CurrentQuestionContextProvider>

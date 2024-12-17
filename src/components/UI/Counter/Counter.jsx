@@ -31,7 +31,7 @@ const Counter = ({ subtitle, handleDecrementBtn, handleIncrementBtn }) => {
   };
 
   useEffect(() => {
-    setQuestions(values.count);
+    setQuestions(+values.count);
   }, [values]);
 
   useEffect(() => {

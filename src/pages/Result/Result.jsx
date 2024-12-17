@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { getDeclension, getRandomQuestion } from '@/utils/utils';
+import { getDeclension } from '@/utils/utils';
 import Button from '@UI/Button/Button';
 import Card from '@UI/Card/Card';
 import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
@@ -37,14 +37,7 @@ const Result = () => {
     setErrorQuestions(0);
     setMinQuestions(1);
     setMaxQuestions(questionsData.questions.length);
-    setAllQuestion([
-      getRandomQuestion(
-        questionsData.questions[
-          Math.floor(Math.random() * questionsData.questions.length)
-        ],
-        questionsData.countries
-      ),
-    ]);
+    setAllQuestion([]);
     setDisableBtn(true);
   };
 

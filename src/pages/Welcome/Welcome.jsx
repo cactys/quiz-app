@@ -6,7 +6,7 @@ import { QuestionsContext } from '@contexts/QuestionsContext';
 import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
 import { CurrentPageContext } from '@contexts/CurrentPageContext';
 import { CurrentQuestionContext } from '@contexts/CurrentQuestionContext';
-import { getRandomQuestion } from '@/utils/utils';
+import { getQuestionFromNumber } from '@/utils/utils';
 
 import styles from './Welcome.module.css';
 
@@ -32,15 +32,6 @@ const Welcome = () => {
   };
 
   const handleIncrementBtn = () => {
-    setAllQuestion([
-      ...allQuestion,
-      getRandomQuestion(
-        questionsData.questions[
-          Math.floor(Math.random() * questionsData.questions.length)
-        ],
-        questionsData.countries
-      ),
-    ]);
     questions < maxQuestions
       ? setQuestions(+questions + 1)
       : setQuestions(+questions);
@@ -57,6 +48,9 @@ const Welcome = () => {
     questions >= maxQuestions
       ? setQuestions(maxQuestions)
       : setQuestions(questions);
+    if (questions !== 0 && questions) {
+      setAllQuestion(getQuestionFromNumber(questionsData, questions));
+    }
   }, [questions]);
 
   useEffect(() => {

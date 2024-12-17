@@ -13,10 +13,10 @@ const useForm = (inputValue) => {
     const { value, name } = e.target;
 
     if (name === 'count') {
-      if (value < 0) {
+      if (value <= 0 || isNaN(value)) {
         setValues({ ...values, [name]: 1 });
       } else {
-        setValues({ ...values, [name]: value });
+        setValues({ ...values, [name]: +value });
       }
     }
   };
