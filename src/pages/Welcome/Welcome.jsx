@@ -21,34 +21,20 @@ const Welcome = () => {
     questionNumber,
     maxQuestions,
     setMaxQuestions,
-    minQuestions,
     disableBtn,
     setDisableBtn,
   } = useContext(CounterQuestionsContext);
   const { setCurrentPage } = useContext(CurrentPageContext);
-  const { allQuestion, setAllQuestion } = useContext(CurrentQuestionContext);
+  const { setAllQuestion } = useContext(CurrentQuestionContext);
   const handleStartTest = () => {
     setCurrentPage(`question#${questionNumber}`);
-  };
-
-  const handleIncrementBtn = () => {
-    questions < maxQuestions
-      ? setQuestions(+questions + 1)
-      : setQuestions(+questions);
-  };
-
-  const handleDecrementBtn = () => {
-    allQuestion.pop();
-    questions > minQuestions
-      ? setQuestions(+questions - 1)
-      : setQuestions(+minQuestions);
   };
 
   useEffect(() => {
     questions >= maxQuestions
       ? setQuestions(maxQuestions)
       : setQuestions(questions);
-    if (questions !== 0 && questions) {
+    if (questions !== 0 || questions) {
       setAllQuestion(getQuestionFromNumber(questionsData, questions));
     }
   }, [questions]);
@@ -72,12 +58,7 @@ const Welcome = () => {
         title="Добро пожаловать"
         subtitle="на викторину по странам и столицам!"
       />
-      <Counter
-        subtitle="Выбери количество вопросов:"
-        count={questions}
-        handleIncrementBtn={handleIncrementBtn}
-        handleDecrementBtn={handleDecrementBtn}
-      />
+      <Counter subtitle="Выбери количество вопросов:" />
       <Button title="Начать" htmlType="button" handleButton={handleStartTest} />
     </>
   );
