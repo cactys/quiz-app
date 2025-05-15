@@ -13,8 +13,8 @@ Quiz App - интерактивное приложение для проверк
 
 1. Клонируйте репозиторий:
 ```sh
-git clone <url-репозитория>
-cd <название-папки-проекта>
+git clone https://github.com/cactys/quiz-app.git
+cd quiz-app
 ```
 
 2. Установите зависимости:
