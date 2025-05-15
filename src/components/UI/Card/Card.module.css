@@ -1,0 +1,44 @@
+.card {
+  width: 100%;
+}
+
+.card__close-btn {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 0;
+  background-color: var(--color-white);
+  cursor: pointer;
+  mask-image: url(../../../assets/images/icons/icons__40error.svg);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: cover;
+}
+
+.card__header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.card__header_place_result {
+  margin: 32px 0 0;
+}
+
+.card__title {
+  font-weight: var(--font-w-bold);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+  text-align: center;
+}
+
+.card__subtitle {
+  font-weight: var(--font-w-medium);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  text-align: center;
+}

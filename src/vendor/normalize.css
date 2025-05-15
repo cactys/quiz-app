@@ -159,6 +159,8 @@ sup {
 
 img {
   border-style: none;
+  object-fit: cover;
+  object-position: bottom;
 }
 
 /* Forms
@@ -183,6 +185,17 @@ textarea {
   margin: 0;
   /* 2 */
 }
+
+/**
+  *outline none with all forms
+  */
+
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+  }
 
 /**
   * Show the overflow in IE.
@@ -395,6 +408,7 @@ a {
   text-decoration: none;
 }
 
-ul {
+ul,
+ol {
   list-style-type: none;
 }

@@ -1,0 +1,16 @@
+.main {
+  position: relative;
+  width: 590px;
+}
+
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  border-radius: var(--radii);
+  padding: var(--main-padding);
+  background-color: var(--color-white);
+}

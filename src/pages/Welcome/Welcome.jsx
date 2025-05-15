@@ -1,46 +1,65 @@
-import { useState } from 'react';
-import Counter from '@ui/Counter/Counter';
-import Button from '@ui/Button/Button';
+import { useContext, useEffect, useState } from 'react';
+import Counter from '@UI/Counter/Counter';
+import Button from '@UI/Button/Button';
+import Card from '@UI/Card/Card';
+import { QuestionsContext } from '@contexts/QuestionsContext';
+import { CounterQuestionsContext } from '@contexts/CounterQuestionsContext';
+import { CurrentPageContext } from '@contexts/CurrentPageContext';
+import { CurrentQuestionContext } from '@contexts/CurrentQuestionContext';
+import { getQuestionFromNumber } from '@/utils/utils';
 
-import imageQuestion from '@assets/images/image__question.svg';
 import styles from './Welcome.module.css';
 
 /**
- *
- * @returns JSX.Element
+ * @returns {JSX.Element} JSX.Element - Welcome component
  */
-
 const Welcome = () => {
-  const [count, setCount] = useState(18);
+  const { questionsData } = useContext(QuestionsContext);
+  const {
+    questions,
+    setQuestions,
+    questionNumber,
+    maxQuestions,
+    setMaxQuestions,
+    disableBtn,
+    setDisableBtn,
+  } = useContext(CounterQuestionsContext);
+  const { setCurrentPage } = useContext(CurrentPageContext);
+  const { setAllQuestion } = useContext(CurrentQuestionContext);
+  const handleStartTest = () => {
+    setCurrentPage(`question#${questionNumber}`);
+  };
 
-  const handleIncrementBtn = () => setCount((count) => parseInt(count) + 1);
+  useEffect(() => {
+    questions >= maxQuestions
+      ? setQuestions(maxQuestions)
+      : setQuestions(questions);
+    if (questions !== 0 || questions) {
+      setAllQuestion(getQuestionFromNumber(questionsData, questions));
+    }
+  }, [questions]);
 
-  const handleDecrementBtn = () =>
-    count > 1 ? setCount((count) => count - 1) : setCount(1);
+  useEffect(() => {
+    if (questions <= 0 || !questions) {
+      setDisableBtn(true);
+    } else {
+      setDisableBtn(false);
+    }
+  }, [disableBtn, questions]);
 
-  const onChange = (e) => setCount(e.target.value);
+  useEffect(() => {
+    setMaxQuestions(questionsData.questions.length);
+  }, [maxQuestions, questionsData]);
 
   return (
     <>
-      <img
-        className={styles.imageQuestion}
-        src={imageQuestion}
-        alt="Добро пожаловать"
-        width={135}
-        height={146}
+      <Card
+        imageClassName={styles.image}
+        title="Добро пожаловать"
+        subtitle="на викторину по странам и столицам!"
       />
-      <div className={styles.header}>
-        <h2 className={styles.title}>Добро пожаловать</h2>
-        <p className={styles.subtitle}>на викторину по странам и столицам!</p>
-      </div>
-      <Counter
-        subtitle="Выбери количество вопросов:"
-        count={count}
-        handleIncrementBtn={handleIncrementBtn}
-        handleDecrementBtn={handleDecrementBtn}
-        onChange={onChange}
-      />
-      <Button title="Начать" htmlType="submit" />
+      <Counter subtitle="Выбери количество вопросов:" />
+      <Button title="Начать" htmlType="button" handleButton={handleStartTest} />
     </>
   );
 };

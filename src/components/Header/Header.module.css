@@ -1,0 +1,7 @@
+.header {
+    width: 590px;
+}
+
+.header__title {
+  display: none;
+}
